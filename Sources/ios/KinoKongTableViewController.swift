@@ -48,75 +48,64 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
     let mediaItem = getItem(for: view)
 
     switch mediaItem.name! {
-    case "Genres":
-      performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
+//      case "New Movies":
+//        performSegue(withIdentifier: NewMoviesTableController.SegueIdentifier, sender: view)
 
-    case "Themes":
-      performSegue(withIdentifier: ThemesController.SegueIdentifier, sender: view)
+//    case "Genres":
+//        performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
+//
+//      case "Filters":
+//        performSegue(withIdentifier: FiltersController.SegueIdentifier, sender: view)
 
-    case "Filters":
-      performSegue(withIdentifier: FiltersController.SegueIdentifier, sender: view)
+      case "Settings":
+        performSegue(withIdentifier: "Settings", sender: view)
 
-    case "Settings":
-      performSegue(withIdentifier: "Settings", sender: view)
-
-    case "Search":
-      performSegue(withIdentifier: SearchController.SegueIdentifier, sender: view)
+      case "Search":
+        performSegue(withIdentifier: SearchTableController.SegueIdentifier, sender: view)
 
     default:
       performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
     }
   }
 
-//  // MARK: - Navigation
-//
-//  override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    if let identifier = segue.identifier {
-//      switch identifier {
-//      case GenresGroupTableViewController.SegueIdentifier:
-//        if let destination = segue.destination as? GenresGroupTableViewController {
-//          destination.document = document
-//        }
-//
-//      case ThemesTableController.SegueIdentifier:
-//        if let destination = segue.destination as? ThemesTableController {
-//          destination.document = document
-//        }
-//
-//      case FiltersTableController.SegueIdentifier:
-//        if let destination = segue.destination as? FiltersTableController {
-//          destination.document = document
-//        }
-//
-//      case MediaItemsController.SegueIdentifier:
-//        if let destination = segue.destination.getActionController() as? MediaItemsController,
-//           let view = sender as? MediaNameTableCell {
-//
-//          let mediaItem = getItem(for: view)
-//
-//          let adapter = KinoKongServiceAdapter(mobile: true)
-//
-//          adapter.requestType = mediaItem.name
-//          adapter.parentName = localizer.localize(mediaItem.name!)
-//
-//          destination.adapter = adapter
-//        }
-//
-//      case SearchTableController.SegueIdentifier:
-//        if let destination = segue.destination.getActionController() as? SearchTableController {
-//
-//          let adapter = KinoKongServiceAdapter(mobile: true)
-//
-//          adapter.requestType = "Search"
-//          adapter.parentName = localizer.localize("Search Results")
-//
-//          destination.adapter = adapter
-//        }
-//
-//      default:
-//        break
-//      }
-//    }
-//  }
+  // MARK: - Navigation
+
+  override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let identifier = segue.identifier {
+      switch identifier {
+//        case NewMoviesTableController.SegueIdentifier:
+//          print("NewMoviesTableController")
+
+
+        case MediaItemsController.SegueIdentifier:
+          if let destination = segue.destination.getActionController() as? MediaItemsController,
+             let view = sender as? MediaNameTableCell {
+
+            let mediaItem = getItem(for: view)
+
+            let adapter = KinoKongServiceAdapter(mobile: true)
+
+            adapter.requestType = mediaItem.name
+            adapter.parentName = localizer.localize(mediaItem.name!)
+
+            destination.adapter = adapter
+          }
+
+        case SearchTableController.SegueIdentifier:
+          if let destination = segue.destination.getActionController() as? SearchTableController {
+
+            let adapter = KinoKongServiceAdapter(mobile: true)
+
+            adapter.requestType = "Search"
+            adapter.parentName = localizer.localize("Search Results")
+
+            destination.adapter = adapter
+          }
+
+        default:
+          break
+      }
+    }
+  }
 
 }

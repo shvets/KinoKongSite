@@ -4,7 +4,7 @@ import SwiftSoup
 import WebAPI
 import TVSetKit
 
-class ThemesTableController: KinoKongBaseTableViewController {
+class NewMoviesTableController: KinoKongBaseTableViewController {
   static let SegueIdentifier = "Themes"
   override open var CellIdentifier: String { return "ThemeTableCell" }
 

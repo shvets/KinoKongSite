@@ -18,7 +18,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
 
   var episodes: [JSON]?
 
-  var document: Document?
+  //var document: Document?
 
   public override init(mobile: Bool=false) {
     super.init(mobile: mobile)
@@ -26,12 +26,12 @@ class KinoKongServiceAdapter: ServiceAdapter {
     bookmarks.load()
     history.load()
 
-    do {
-      document = try service.fetchDocument(KinoKongAPI.SiteUrl)!
-    }
-    catch {
-      print("Error fetching document")
-    }
+//    do {
+//      document = try service.fetchDocument(KinoKongAPI.SiteUrl)!
+//    }
+//    catch {
+//      print("Error fetching document")
+//    }
 
     pageSize = 12
     rowSize = 6
@@ -62,7 +62,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     params.bookmarks = bookmarks
     params.history = history
     params.selectedItem = selectedItem
-    params.document = document
+    //params.document = document
 
     if let requestType = requestType {
       return try dataSource.load(requestType, params: params, pageSize: pageSize!, currentPage: currentPage)

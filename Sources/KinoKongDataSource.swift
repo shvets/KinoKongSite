@@ -13,7 +13,6 @@ class KinoKongDataSource: DataSource {
     let bookmarks = params.bookmarks!
     let history = params.history!
     let selectedItem = params.selectedItem
-    let document = params.document as! Document
 
     var request = requestType
 
@@ -33,16 +32,9 @@ class KinoKongDataSource: DataSource {
         history.load()
         result = history.getHistoryItems(pageSize: pageSize, page: currentPage)
 
-      case "All Movies":
-        result = try service.getAllMovies(page: currentPage)["movies"] as! [Any]
+      case "New Moves":
+         result = try service.getNewMovies(page: currentPage)["movies"] as! [Any]
 
-//      case "Movies":
-//        let id = selectedItem!.id
-//
-//        let document = try service.fetchDocument(service.getPagePath(KinoKongAPI.SiteUrl + "/" + id!, page: currentPage))
-//
-//        result = try service.getMovies(document!, path: id!)["movies"] as! [Any]
-//
 //      case "Genres":
 //        result = try service.getGenres(document)
 //
