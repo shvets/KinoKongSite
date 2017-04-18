@@ -53,16 +53,29 @@ class KinoKongDataSource: DataSource {
       case "Genres Group":
         let groupedGenres = try service.getGroupedGenres()
 
-        let genresType = "/" + params.identifier! + "/"
+        let genresType = params.identifier!
 
         result = groupedGenres[genresType]!
-
-        print(result)
 
       case "Genres":
         let path = selectedItem!.id
 
         result = try service.getMovies(path!, page: currentPage)["movies"] as! [Any]
+
+      case "Popular":
+        let groupedGenres = try service.getGroupedGenres()
+
+        result = groupedGenres["top"]!
+
+      case "Rating":
+        let path = selectedItem!.id
+
+        if path == "/podborka.html" {
+          result = try service.getTags()
+        }
+        else {
+          result = try service.getMoviesByCriteriaPaginated(path!, page: currentPage)["movies"] as! [Any]
+        }
 
 //      case "Seasons":
 //        result = try service.getSeasons(identifier!, parentName: params.parentName!, thumb: selectedItem?.thumb)

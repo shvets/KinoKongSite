@@ -16,18 +16,9 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
 
     title = localizer.localize("KinoKong")
 
-    //adapter = KinoKongServiceAdapter(mobile: true)
-
     self.clearsSelectionOnViewWillAppear = false
 
     loadData()
-
-//    do {
-//      document = try service.fetchDocument(KinoKongAPI.SiteUrl)
-//    }
-//    catch {
-//      print("Cannot load document")
-//    }
   }
 
   func loadData() {
@@ -53,7 +44,7 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
         performSegue(withIdentifier: GenresGroupTableViewController.SegueIdentifier, sender: view)
 
       case "Popular":
-        performSegue(withIdentifier: PopularGroupTableViewController.SegueIdentifier, sender: view)
+        performSegue(withIdentifier: PopularTableViewController.SegueIdentifier, sender: view)
 
       case "Settings":
         performSegue(withIdentifier: "Settings", sender: view)
@@ -71,8 +62,13 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
   override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
       switch identifier {
-//        case NewMoviesTableController.SegueIdentifier:
-//          print("NewMoviesTableController")
+        case PopularTableViewController.SegueIdentifier:
+          if let destination = segue.destination as? PopularTableViewController {
+            let adapter = KinoKongServiceAdapter(mobile: true)
+            adapter.requestType = "Popular"
+
+            destination.adapter = adapter
+          }
 
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,

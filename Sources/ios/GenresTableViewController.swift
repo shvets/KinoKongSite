@@ -9,25 +9,11 @@ class GenresTableViewController: KinoKongBaseTableViewController {
 
   override public var CellIdentifier: String { return "GenreTableCell" }
 
-  var document: Document?
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.clearsSelectionOnViewWillAppear = false
 
-//    do {
-//      let genres = try service.getGenres(document!, type: adapter.parentId!) as! [[String: String]]
-//
-//      for genre in genres {
-//        let item = MediaItem(name: localizer.localize(genre["name"]!), id: genre["id"]!)
-//
-//        items.append(item)
-//      }
-//    }
-//    catch {
-//      print("Error getting document")
-//    }
     loadInitialData()
   }
 
