@@ -9,13 +9,13 @@ class GenresTableViewController: KinoKongBaseTableViewController {
 
   override public var CellIdentifier: String { return "GenreTableCell" }
 
-//  var document: Document?
-//
-//  override func viewDidLoad() {
-//    super.viewDidLoad()
-//
-//    self.clearsSelectionOnViewWillAppear = false
-//
+  var document: Document?
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    self.clearsSelectionOnViewWillAppear = false
+
 //    do {
 //      let genres = try service.getGenres(document!, type: adapter.parentId!) as! [[String: String]]
 //
@@ -28,32 +28,33 @@ class GenresTableViewController: KinoKongBaseTableViewController {
 //    catch {
 //      print("Error getting document")
 //    }
-//  }
-//
-//  override open func navigate(from view: UITableViewCell) {
-//    performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
-//  }
-//
-//  // MARK: - Navigation
-//
-//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    if let identifier = segue.identifier {
-//      switch identifier {
-//      case MediaItemsController.SegueIdentifier:
-//        if let destination = segue.destination.getActionController() as? MediaItemsController,
-//           let view = sender as? MediaNameTableCell {
-//
-//          let adapter = KinoKongServiceAdapter(mobile: true)
-//
-//          adapter.requestType = "Movies"
-//          adapter.selectedItem = getItem(for: view)
-//
-//          destination.adapter = adapter
-//        }
-//
-//      default: break
-//      }
-//    }
-//  }
+    loadInitialData()
+  }
+
+  override open func navigate(from view: UITableViewCell) {
+    performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
+  }
+
+  // MARK: - Navigation
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let identifier = segue.identifier {
+      switch identifier {
+        case MediaItemsController.SegueIdentifier:
+          if let destination = segue.destination.getActionController() as? MediaItemsController,
+             let view = sender as? MediaNameTableCell {
+
+            let adapter = KinoKongServiceAdapter(mobile: true)
+
+            adapter.requestType = "Genres"
+            adapter.selectedItem = getItem(for: view)
+
+            destination.adapter = adapter
+          }
+
+        default: break
+      }
+    }
+  }
 
 }

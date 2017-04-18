@@ -50,10 +50,19 @@ class KinoKongDataSource: DataSource {
       case "Shows":
         result = try service.getTvShows(page: currentPage)["movies"] as! [Any]
 
-//      case "Genres":
-//        result = try service.getGenres(document)
-//
+      case "Genres Group":
+        let groupedGenres = try service.getGroupedGenres()
 
+        let genresType = "/" + params.identifier! + "/"
+
+        result = groupedGenres[genresType]!
+
+        print(result)
+
+      case "Genres":
+        let path = selectedItem!.id
+
+        result = try service.getMovies(path!, page: currentPage)["movies"] as! [Any]
 
 //      case "Seasons":
 //        result = try service.getSeasons(identifier!, parentName: params.parentName!, thumb: selectedItem?.thumb)

@@ -53,7 +53,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
     params.bookmarks = bookmarks
     params.history = history
     params.selectedItem = selectedItem
-    //params.document = document
 
     if let requestType = requestType {
       return try dataSource.load(requestType, params: params, pageSize: pageSize!, currentPage: currentPage)
@@ -84,16 +83,18 @@ class KinoKongServiceAdapter: ServiceAdapter {
     let id = params["id"] as! String
     let mediaItem = params["item"] as! MediaItem
 
-    let urls: [String] = []
+    let urls: [String] = try service.getUrls(id)
       //try service.getUrls(id, season: mediaItem.seasonNumber!, episode: mediaItem.episodeNumber!)
 
-    var newUrls: [String] = []
-
+//    var newUrls: [String] = []
+//
 //    for url in urls {
 //      newUrls.append(url["url"]!)
 //    }
+//
+//    return newUrls[0]
 
-    return newUrls[0]
+    return urls[0]
   }
 
 //  override func retrieveExtraInfo(_ item: MediaItem) throws {
