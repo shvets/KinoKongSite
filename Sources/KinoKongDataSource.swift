@@ -32,61 +32,29 @@ class KinoKongDataSource: DataSource {
         history.load()
         result = history.getHistoryItems(pageSize: pageSize, page: currentPage)
 
-      case "New Moves":
+      case "All Movies":
+        result = try service.getAllMovies(page: currentPage)["movies"] as! [Any]
+
+      case "New Movies":
          result = try service.getNewMovies(page: currentPage)["movies"] as! [Any]
+
+      case "All Series":
+        result = try service.getAllSeries(page: currentPage)["movies"] as! [Any]
+
+      case "Animations":
+        result = try service.getAnimations(page: currentPage)["movies"] as! [Any]
+
+      case "Anime":
+        result = try service.getAnime(page: currentPage)["movies"] as! [Any]
+
+      case "Shows":
+        result = try service.getTvShows(page: currentPage)["movies"] as! [Any]
 
 //      case "Genres":
 //        result = try service.getGenres(document)
 //
-//      case "Themes":
-//        let theme = selectedItem!.name
-//
-//        if theme == "Top Seven" {
-//          result = try service.getTopLinks(document)
-//        }
-//        else if theme == "New Movies" {
-//          let id = "/new/"
-//
-//          let document = try service.fetchDocument(service.getPagePath(KinoKongAPI.SiteUrl + id, page: currentPage))
-//
-//          result = try service.getMovies(document!, path: id)["movies"] as! [Any]
-//        }
-//        else if theme == "Premiers" {
-//          let id = "/premiers/"
-//
-//          let document = try service.fetchDocument(service.getPagePath(KinoKongAPI.SiteUrl + id, page: currentPage))
-//
-//          result = try service.getMovies(document!, path: id)["movies"] as! [Any]
-//        }
-//
-//      case "Filters":
-//        let theme = selectedItem!.name
-//
-//        if theme == "By Actors" {
-//          result = try service.getTopLinks(document)
-//        }
-//        else if theme == "By Directors" {
-//          let id = "/new/"
-//
-//          let document = try service.fetchDocument(service.getPagePath(KinoKongAPI.SiteUrl + id, page: currentPage))
-//
-//          result = try service.getMovies(document!, path: id)["movies"] as! [Any]
-//        }
-//        else if theme == "By Countries" {
-//          let id = "/premiers/"
-//
-//          let document = try service.fetchDocument(service.getPagePath(KinoKongAPI.SiteUrl + id, page: currentPage))
-//
-//          result = try service.getMovies(document!, path: id)["movies"] as! [Any]
-//        }
-//        else if theme == "By Years" {
-//          let id = "/premiers/"
-//
-//          let document = try service.fetchDocument(service.getPagePath(KinoKongAPI.SiteUrl + id, page: currentPage))
-//
-//          result = try service.getMovies(document!, path: id)["movies"] as! [Any]
-//        }
-//
+
+
 //      case "Seasons":
 //        result = try service.getSeasons(identifier!, parentName: params.parentName!, thumb: selectedItem?.thumb)
 //

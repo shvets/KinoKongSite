@@ -12,9 +12,10 @@
 "Search" = "Search";
 "Settings" = "Settings";
 
-"New Movies" = "All Movies";
-"Serials" = "Serials";
-"Animation" = "Animation";
+"All Movies" = "All Movies";
+"New Movies" = "New Movies";
+"All Series" = "All Serials";
+"Animations" = "Animations";
 "Anime" = "Anime";
 "Shows" = "Shows";
 "Genres" = "Genres";

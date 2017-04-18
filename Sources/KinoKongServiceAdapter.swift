@@ -18,23 +18,14 @@ class KinoKongServiceAdapter: ServiceAdapter {
 
   var episodes: [JSON]?
 
-  //var document: Document?
-
   public override init(mobile: Bool=false) {
     super.init(mobile: mobile)
     
     bookmarks.load()
     history.load()
 
-//    do {
-//      document = try service.fetchDocument(KinoKongAPI.SiteUrl)!
-//    }
-//    catch {
-//      print("Error fetching document")
-//    }
-
-    pageSize = 12
-    rowSize = 6
+    pageSize = 15
+    rowSize = 3
   }
 
   override open func clone() -> ServiceAdapter {

@@ -33,9 +33,10 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
   func loadData() {
     items.append(MediaItem(name: "Bookmarks", imageName: "Star"))
     items.append(MediaItem(name: "History", imageName: "Bookmark"))
+    items.append(MediaItem(name: "All Movies", imageName: "Retro TV"))
     items.append(MediaItem(name: "New Movies", imageName: "Retro TV"))
-    items.append(MediaItem(name: "Serials", imageName: "Retro TV"))
-    items.append(MediaItem(name: "Animation", imageName: "Retro TV"))
+    items.append(MediaItem(name: "All Series", imageName: "Retro TV"))
+    items.append(MediaItem(name: "Animations", imageName: "Retro TV"))
     items.append(MediaItem(name: "Anime", imageName: "Retro TV"))
     items.append(MediaItem(name: "Shows", imageName: "Briefcase"))
     items.append(MediaItem(name: "Genres", imageName: "Comedy"))
@@ -48,14 +49,11 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
     let mediaItem = getItem(for: view)
 
     switch mediaItem.name! {
-//      case "New Movies":
-//        performSegue(withIdentifier: NewMoviesTableController.SegueIdentifier, sender: view)
+      case "Genres":
+        performSegue(withIdentifier: GenresGroupTableViewController.SegueIdentifier, sender: view)
 
-//    case "Genres":
-//        performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
-//
-//      case "Filters":
-//        performSegue(withIdentifier: FiltersController.SegueIdentifier, sender: view)
+      case "Popular":
+        performSegue(withIdentifier: PopularGroupTableViewController.SegueIdentifier, sender: view)
 
       case "Settings":
         performSegue(withIdentifier: "Settings", sender: view)
@@ -75,7 +73,6 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
       switch identifier {
 //        case NewMoviesTableController.SegueIdentifier:
 //          print("NewMoviesTableController")
-
 
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,

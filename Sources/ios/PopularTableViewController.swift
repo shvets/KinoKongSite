@@ -4,40 +4,29 @@ import SwiftSoup
 import WebAPI
 import TVSetKit
 
-class LetterTableController: KinoKongBaseTableViewController {
-  static let SegueIdentifier = "Letter"
+class PopularTableViewController: KinoKongBaseTableViewController {
+  static let SegueIdentifier = "Genres"
 
-  override open var CellIdentifier: String { return "LetterTableCell" }
+  override public var CellIdentifier: String { return "PopularTableCell" }
 
-  var document: Document?
-  var requestType: String?
-
+//  var document: Document?
+//
 //  override func viewDidLoad() {
 //    super.viewDidLoad()
 //
 //    self.clearsSelectionOnViewWillAppear = false
 //
 //    do {
-//      var data: [Any]?
+//      let genres = try service.getGenres(document!, type: adapter.parentId!) as! [[String: String]]
 //
-//      if requestType == "By Actors" {
-//        data = try service.getActors(document!, letter: adapter.parentId!)
-//      }
-//      else if requestType == "By Directors" {
-//        data = try service.getDirectors(document!, letter: adapter.parentId!)
-//      }
+//      for genre in genres {
+//        let item = MediaItem(name: localizer.localize(genre["name"]!), id: genre["id"]!)
 //
-//      for item in data! {
-//        let elem = item as! [String: Any]
-//
-//        let id = elem["id"] as! String
-//        let name = elem["name"] as! String
-//
-//        items.append(MediaItem(name: name, id: id))
+//        items.append(item)
 //      }
 //    }
 //    catch {
-//      print("Error getting items")
+//      print("Error getting document")
 //    }
 //  }
 //

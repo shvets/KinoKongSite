@@ -7,16 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DBA108798E6FB1C0BBAB85F /* LettersTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA126EA5F7DB7C52B718B4 /* LettersTableController.swift */; };
-		2DBA10FA73813F7BE8707A11 /* GenresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA18E01A339B253F958A56 /* GenresTableViewController.swift */; };
-		2DBA111863DFCE4A9232E9F2 /* CountriesTabeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1416C604C86AD77C7F35 /* CountriesTabeController.swift */; };
-		2DBA112715E07869F242A060 /* YearsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA165B0D3397FCF2EC190C /* YearsTableController.swift */; };
-		2DBA115483712005D29BF056 /* LetterTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA17C6F0B92800490EF432 /* LetterTableController.swift */; };
-		2DBA14119F241D017E994C10 /* NewMoviesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1AFCF64F56015EB02C7D /* NewMoviesTableController.swift */; };
-		2DBA15D16E4D59E5356BCBA7 /* GenresGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA173D4353F1370462C527 /* GenresGroupTableViewController.swift */; };
-		2DBA15D2B56188741468F27D /* SearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B598C06F32A7EE60816 /* SearchTableController.swift */; };
-		2DBA19E47078F04FA6A12BCA /* FiltersTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA11E0AB44F3B1CA1E302C /* FiltersTableController.swift */; };
-		2DBA1DDFF1872B0F6CEC224B /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B9B5FE880E905E94D73 /* SettingsTableController.swift */; };
+		2DBA1539D3E0E1E07C9C23E9 /* PopularGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D4A569A982D9765A160 /* PopularGroupTableViewController.swift */; };
+		2DBA1A2104DFFB5422CEC90C /* PopularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12655C11FFC5E0292F3B /* PopularTableViewController.swift */; };
 		FA9BF8331EA3F1DE002F7D52 /* KinoKongSite.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9BF8311EA3F1DE002F7D52 /* KinoKongSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA9BF83F1EA3F21D002F7D52 /* ios in Resources */ = {isa = PBXBuildFile; fileRef = FA9BF8391EA3F21D002F7D52 /* ios */; };
 		FA9BF8401EA3F21D002F7D52 /* KinoKongDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9BF83A1EA3F21D002F7D52 /* KinoKongDataSource.swift */; };
@@ -33,21 +25,23 @@
 		FAAFE49B1EA3F42C0092387A /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE4931EA3F42C0092387A /* Unbox.framework */; };
 		FAAFE49C1EA3F42C0092387A /* WebAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE4941EA3F42C0092387A /* WebAPI.framework */; };
 		FAAFE49D1EA3F42C0092387A /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE4951EA3F42C0092387A /* Wrap.framework */; };
-		FAAFE4AD1EA3F5600092387A /* KinoKongBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4A51EA3F5600092387A /* KinoKongBaseTableViewController.swift */; };
-		FAAFE4AE1EA3F5600092387A /* KinoKongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4A61EA3F5600092387A /* KinoKongTableViewController.swift */; };
+		FAAFE4EC1EA5ACAE0092387A /* GenresGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E01EA5ACAE0092387A /* GenresGroupTableViewController.swift */; };
+		FAAFE4ED1EA5ACAE0092387A /* GenresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E11EA5ACAE0092387A /* GenresTableViewController.swift */; };
+		FAAFE4EE1EA5ACAE0092387A /* KinoKongBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E21EA5ACAE0092387A /* KinoKongBaseTableViewController.swift */; };
+		FAAFE4EF1EA5ACAE0092387A /* KinoKongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E31EA5ACAE0092387A /* KinoKongTableViewController.swift */; };
+		FAAFE4F01EA5ACAE0092387A /* SearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E41EA5ACAE0092387A /* SearchTableController.swift */; };
+		FAAFE4F11EA5ACAE0092387A /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E51EA5ACAE0092387A /* SettingsTableController.swift */; };
+		FAAFE4F21EA5ACAE0092387A /* GenresController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E61EA5ACAE0092387A /* GenresController.swift */; };
+		FAAFE4F31EA5ACAE0092387A /* GenresGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E71EA5ACAE0092387A /* GenresGroupController.swift */; };
+		FAAFE4F41EA5ACAE0092387A /* KinoKongBaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E81EA5ACAE0092387A /* KinoKongBaseCollectionViewController.swift */; };
+		FAAFE4F51EA5ACAE0092387A /* KinoKongController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4E91EA5ACAE0092387A /* KinoKongController.swift */; };
+		FAAFE4F61EA5ACAE0092387A /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4EA1EA5ACAE0092387A /* SearchController.swift */; };
+		FAAFE4F71EA5ACAE0092387A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4EB1EA5ACAE0092387A /* SettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2DBA11E0AB44F3B1CA1E302C /* FiltersTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FiltersTableController.swift; path = ios/FiltersTableController.swift; sourceTree = "<group>"; };
-		2DBA126EA5F7DB7C52B718B4 /* LettersTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LettersTableController.swift; path = ios/LettersTableController.swift; sourceTree = "<group>"; };
-		2DBA1416C604C86AD77C7F35 /* CountriesTabeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountriesTabeController.swift; path = ios/CountriesTabeController.swift; sourceTree = "<group>"; };
-		2DBA165B0D3397FCF2EC190C /* YearsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearsTableController.swift; path = ios/YearsTableController.swift; sourceTree = "<group>"; };
-		2DBA173D4353F1370462C527 /* GenresGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenresGroupTableViewController.swift; path = ios/GenresGroupTableViewController.swift; sourceTree = "<group>"; };
-		2DBA17C6F0B92800490EF432 /* LetterTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LetterTableController.swift; path = ios/LetterTableController.swift; sourceTree = "<group>"; };
-		2DBA18E01A339B253F958A56 /* GenresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenresTableViewController.swift; path = ios/GenresTableViewController.swift; sourceTree = "<group>"; };
-		2DBA1AFCF64F56015EB02C7D /* NewMoviesTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMoviesTableController.swift; path = ios/NewMoviesTableController.swift; sourceTree = "<group>"; };
-		2DBA1B598C06F32A7EE60816 /* SearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableController.swift; path = ios/SearchTableController.swift; sourceTree = "<group>"; };
-		2DBA1B9B5FE880E905E94D73 /* SettingsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableController.swift; path = ios/SettingsTableController.swift; sourceTree = "<group>"; };
+		2DBA12655C11FFC5E0292F3B /* PopularTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopularTableViewController.swift; path = ios/PopularTableViewController.swift; sourceTree = "<group>"; };
+		2DBA1D4A569A982D9765A160 /* PopularGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopularGroupTableViewController.swift; path = ios/PopularGroupTableViewController.swift; sourceTree = "<group>"; };
 		FA9BF82E1EA3F1DE002F7D52 /* KinoKongSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinoKongSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9BF8311EA3F1DE002F7D52 /* KinoKongSite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinoKongSite.h; sourceTree = "<group>"; };
 		FA9BF8321EA3F1DE002F7D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,8 +61,18 @@
 		FAAFE4931EA3F42C0092387A /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/EtvnetApp-auvgeykttffxrlaelzqpbfeqnwis/Build/Products/Debug-iphonesimulator/Unbox.framework"; sourceTree = "<group>"; };
 		FAAFE4941EA3F42C0092387A /* WebAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebAPI.framework; path = "../WebAPI/build/Debug-appletvos/WebAPI.framework"; sourceTree = "<group>"; };
 		FAAFE4951EA3F42C0092387A /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/EtvnetApp-auvgeykttffxrlaelzqpbfeqnwis/Build/Products/Debug-iphonesimulator/Wrap.framework"; sourceTree = "<group>"; };
-		FAAFE4A51EA3F5600092387A /* KinoKongBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KinoKongBaseTableViewController.swift; path = ios/KinoKongBaseTableViewController.swift; sourceTree = "<group>"; };
-		FAAFE4A61EA3F5600092387A /* KinoKongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KinoKongTableViewController.swift; path = ios/KinoKongTableViewController.swift; sourceTree = "<group>"; };
+		FAAFE4E01EA5ACAE0092387A /* GenresGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenresGroupTableViewController.swift; path = ios/GenresGroupTableViewController.swift; sourceTree = "<group>"; };
+		FAAFE4E11EA5ACAE0092387A /* GenresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenresTableViewController.swift; path = ios/GenresTableViewController.swift; sourceTree = "<group>"; };
+		FAAFE4E21EA5ACAE0092387A /* KinoKongBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KinoKongBaseTableViewController.swift; path = ios/KinoKongBaseTableViewController.swift; sourceTree = "<group>"; };
+		FAAFE4E31EA5ACAE0092387A /* KinoKongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KinoKongTableViewController.swift; path = ios/KinoKongTableViewController.swift; sourceTree = "<group>"; };
+		FAAFE4E41EA5ACAE0092387A /* SearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableController.swift; path = ios/SearchTableController.swift; sourceTree = "<group>"; };
+		FAAFE4E51EA5ACAE0092387A /* SettingsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableController.swift; path = ios/SettingsTableController.swift; sourceTree = "<group>"; };
+		FAAFE4E61EA5ACAE0092387A /* GenresController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenresController.swift; path = tvos/GenresController.swift; sourceTree = "<group>"; };
+		FAAFE4E71EA5ACAE0092387A /* GenresGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenresGroupController.swift; path = tvos/GenresGroupController.swift; sourceTree = "<group>"; };
+		FAAFE4E81EA5ACAE0092387A /* KinoKongBaseCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KinoKongBaseCollectionViewController.swift; path = tvos/KinoKongBaseCollectionViewController.swift; sourceTree = "<group>"; };
+		FAAFE4E91EA5ACAE0092387A /* KinoKongController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KinoKongController.swift; path = tvos/KinoKongController.swift; sourceTree = "<group>"; };
+		FAAFE4EA1EA5ACAE0092387A /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchController.swift; path = tvos/SearchController.swift; sourceTree = "<group>"; };
+		FAAFE4EB1EA5ACAE0092387A /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsController.swift; path = tvos/SettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +114,18 @@
 		FA9BF8301EA3F1DE002F7D52 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FAAFE4A51EA3F5600092387A /* KinoKongBaseTableViewController.swift */,
-				FAAFE4A61EA3F5600092387A /* KinoKongTableViewController.swift */,
+				FAAFE4E01EA5ACAE0092387A /* GenresGroupTableViewController.swift */,
+				FAAFE4E11EA5ACAE0092387A /* GenresTableViewController.swift */,
+				FAAFE4E21EA5ACAE0092387A /* KinoKongBaseTableViewController.swift */,
+				FAAFE4E31EA5ACAE0092387A /* KinoKongTableViewController.swift */,
+				FAAFE4E41EA5ACAE0092387A /* SearchTableController.swift */,
+				FAAFE4E51EA5ACAE0092387A /* SettingsTableController.swift */,
+				FAAFE4E61EA5ACAE0092387A /* GenresController.swift */,
+				FAAFE4E71EA5ACAE0092387A /* GenresGroupController.swift */,
+				FAAFE4E81EA5ACAE0092387A /* KinoKongBaseCollectionViewController.swift */,
+				FAAFE4E91EA5ACAE0092387A /* KinoKongController.swift */,
+				FAAFE4EA1EA5ACAE0092387A /* SearchController.swift */,
+				FAAFE4EB1EA5ACAE0092387A /* SettingsController.swift */,
 				FA9BF8391EA3F21D002F7D52 /* ios */,
 				FA9BF83A1EA3F21D002F7D52 /* KinoKongDataSource.swift */,
 				FA9BF83B1EA3F21D002F7D52 /* KinoKongMediaItem.swift */,
@@ -121,16 +135,8 @@
 				FA9BF8311EA3F1DE002F7D52 /* KinoKongSite.h */,
 				FA9BF8321EA3F1DE002F7D52 /* Info.plist */,
 				FAAFE4841EA3F2CC0092387A /* Localizable.strings */,
-				2DBA1416C604C86AD77C7F35 /* CountriesTabeController.swift */,
-				2DBA11E0AB44F3B1CA1E302C /* FiltersTableController.swift */,
-				2DBA173D4353F1370462C527 /* GenresGroupTableViewController.swift */,
-				2DBA18E01A339B253F958A56 /* GenresTableViewController.swift */,
-				2DBA126EA5F7DB7C52B718B4 /* LettersTableController.swift */,
-				2DBA17C6F0B92800490EF432 /* LetterTableController.swift */,
-				2DBA1AFCF64F56015EB02C7D /* NewMoviesTableController.swift */,
-				2DBA1B598C06F32A7EE60816 /* SearchTableController.swift */,
-				2DBA1B9B5FE880E905E94D73 /* SettingsTableController.swift */,
-				2DBA165B0D3397FCF2EC190C /* YearsTableController.swift */,
+				2DBA1D4A569A982D9765A160 /* PopularGroupTableViewController.swift */,
+				2DBA12655C11FFC5E0292F3B /* PopularTableViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -235,22 +241,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAAFE4F71EA5ACAE0092387A /* SettingsController.swift in Sources */,
 				FA9BF8401EA3F21D002F7D52 /* KinoKongDataSource.swift in Sources */,
-				FAAFE4AE1EA3F5600092387A /* KinoKongTableViewController.swift in Sources */,
+				FAAFE4F11EA5ACAE0092387A /* SettingsTableController.swift in Sources */,
+				FAAFE4EE1EA5ACAE0092387A /* KinoKongBaseTableViewController.swift in Sources */,
+				FAAFE4F41EA5ACAE0092387A /* KinoKongBaseCollectionViewController.swift in Sources */,
+				FAAFE4F01EA5ACAE0092387A /* SearchTableController.swift in Sources */,
+				FAAFE4EC1EA5ACAE0092387A /* GenresGroupTableViewController.swift in Sources */,
 				FA9BF8431EA3F21D002F7D52 /* KinoKongServiceAdapter.swift in Sources */,
+				FAAFE4F51EA5ACAE0092387A /* KinoKongController.swift in Sources */,
 				FA9BF8421EA3F21D002F7D52 /* KinoKongService.swift in Sources */,
+				FAAFE4F31EA5ACAE0092387A /* GenresGroupController.swift in Sources */,
+				FAAFE4F61EA5ACAE0092387A /* SearchController.swift in Sources */,
 				FA9BF8411EA3F21D002F7D52 /* KinoKongMediaItem.swift in Sources */,
-				FAAFE4AD1EA3F5600092387A /* KinoKongBaseTableViewController.swift in Sources */,
-				2DBA111863DFCE4A9232E9F2 /* CountriesTabeController.swift in Sources */,
-				2DBA19E47078F04FA6A12BCA /* FiltersTableController.swift in Sources */,
-				2DBA15D16E4D59E5356BCBA7 /* GenresGroupTableViewController.swift in Sources */,
-				2DBA10FA73813F7BE8707A11 /* GenresTableViewController.swift in Sources */,
-				2DBA108798E6FB1C0BBAB85F /* LettersTableController.swift in Sources */,
-				2DBA115483712005D29BF056 /* LetterTableController.swift in Sources */,
-				2DBA14119F241D017E994C10 /* NewMoviesTableController.swift in Sources */,
-				2DBA15D2B56188741468F27D /* SearchTableController.swift in Sources */,
-				2DBA1DDFF1872B0F6CEC224B /* SettingsTableController.swift in Sources */,
-				2DBA112715E07869F242A060 /* YearsTableController.swift in Sources */,
+				FAAFE4ED1EA5ACAE0092387A /* GenresTableViewController.swift in Sources */,
+				FAAFE4EF1EA5ACAE0092387A /* KinoKongTableViewController.swift in Sources */,
+				2DBA1539D3E0E1E07C9C23E9 /* PopularGroupTableViewController.swift in Sources */,
+				2DBA1A2104DFFB5422CEC90C /* PopularTableViewController.swift in Sources */,
+				FAAFE4F21EA5ACAE0092387A /* GenresController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

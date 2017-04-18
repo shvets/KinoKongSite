@@ -4,13 +4,19 @@ import SwiftSoup
 import WebAPI
 import TVSetKit
 
-class LettersTableController: KinoKongBaseTableViewController {
-  static let SegueIdentifier = "Letters"
+class PopularGroupTableViewController: KinoKongBaseTableViewController {
+  static let SegueIdentifier = "Genres Group"
 
-  override open var CellIdentifier: String { return "LettersTableCell" }
+  override open var CellIdentifier: String { return "PopularGroupTableCell" }
+
+  let GENRES_MENU = [
+    "Family",
+    "Crime",
+    "Fiction",
+    "Education"
+  ]
 
   var document: Document?
-  var requestType: String?
 
 //  override func viewDidLoad() {
 //    super.viewDidLoad()
@@ -19,15 +25,15 @@ class LettersTableController: KinoKongBaseTableViewController {
 //
 //    adapter = KinoKongServiceAdapter(mobile: true)
 //
-//    for letter in KinoKongAPI.CyrillicLetters {
-//      if !["Ё", "Й", "Щ", "Ъ", "Ы", "Ь"].contains(letter) {
-//        items.append(MediaItem(name: letter))
-//      }
+//    for name in GENRES_MENU {
+//      let item = MediaItem(name: name)
+//
+//      items.append(item)
 //    }
 //  }
 //
 //  override open func navigate(from view: UITableViewCell) {
-//    performSegue(withIdentifier: LetterTableController.SegueIdentifier, sender: view)
+//    performSegue(withIdentifier: GenresController.SegueIdentifier, sender: view)
 //  }
 //
 //  // MARK: - Navigation
@@ -35,19 +41,18 @@ class LettersTableController: KinoKongBaseTableViewController {
 //  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //    if let identifier = segue.identifier {
 //      switch identifier {
-//        case LetterTableController.SegueIdentifier:
-//          if let destination = segue.destination as? LetterTableController,
+//        case GenresController.SegueIdentifier:
+//          if let destination = segue.destination as? GenresTableViewController,
 //             let selectedCell = sender as? MediaNameTableCell {
-//            adapter.requestType = "Letter"
+//            adapter.requestType = "Genres"
 //
-//            let mediaItem =  getItem(for: selectedCell)
+//            let mediaItem = getItem(for: selectedCell)
 //
 //            adapter.parentId = mediaItem.name
-//            adapter.parentName = localizer.localize(requestType!)
+//            adapter.parentName = localizer.localize(mediaItem.name!)
 //
 //            destination.adapter = adapter
 //            destination.document = document
-//            destination.requestType = requestType
 //          }
 //
 //        default: break

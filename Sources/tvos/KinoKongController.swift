@@ -60,11 +60,11 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
       case "Genres":
         performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
 
-      case "Themes":
-        performSegue(withIdentifier: ThemesController.SegueIdentifier, sender: view)
-
-      case "Filters":
-        performSegue(withIdentifier: FiltersController.SegueIdentifier, sender: view)
+//      case "Themes":
+//        performSegue(withIdentifier: ThemesController.SegueIdentifier, sender: view)
+//
+//      case "Filters":
+//        performSegue(withIdentifier: FiltersController.SegueIdentifier, sender: view)
 
       case "Settings":
         performSegue(withIdentifier: "Settings", sender: view)
@@ -82,20 +82,20 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
   override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
       switch identifier {
-        case GenresGroupController.SegueIdentifier:
-          if let destination = segue.destination as? GenresGroupController {
-            destination.document = document
-          }
+//        case GenresGroupController.SegueIdentifier:
+//          if let destination = segue.destination as? GenresGroupController {
+//            destination.document = document
+//          }
 
-        case ThemesController.SegueIdentifier:
-          if let destination = segue.destination as? ThemesController {
-            destination.document = document
-          }
-
-        case FiltersController.SegueIdentifier:
-          if let destination = segue.destination as? FiltersController {
-            destination.document = document
-          }
+//        case ThemesController.SegueIdentifier:
+//          if let destination = segue.destination as? ThemesController {
+//            destination.document = document
+//          }
+//
+//        case FiltersController.SegueIdentifier:
+//          if let destination = segue.destination as? FiltersController {
+//            destination.document = document
+//          }
 
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,
