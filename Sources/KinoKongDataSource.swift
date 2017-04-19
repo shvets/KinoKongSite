@@ -16,12 +16,14 @@ class KinoKongDataSource: DataSource {
 
     var request = requestType
 
-//    if selectedItem?.type == "serie" {
-//      request = "Seasons"
-//    }
-//    else if selectedItem?.type == "season" {
-//      request = "Episodes"
-//    }
+    print(selectedItem?.type)
+
+    if selectedItem?.type == "serie" {
+      request = "Seasons"
+    }
+    else if selectedItem?.type == "season" {
+      request = "Episodes"
+    }
 
     switch request {
       case "Bookmarks":
@@ -77,12 +79,47 @@ class KinoKongDataSource: DataSource {
           result = try service.getMoviesByCriteriaPaginated(path!, page: currentPage)["movies"] as! [Any]
         }
 
-//      case "Seasons":
-//        result = try service.getSeasons(identifier!, parentName: params.parentName!, thumb: selectedItem?.thumb)
+      case "Seasons":
+        let path = ""
+        let name = ""
+        let thumb = ""
+        let playlistUrl = try service.getSeriePlaylistUrl(path)
+        let serieInfo = try service.getSerieInfo(playlistUrl)
+
+        var data = [Any]()
+
+        for (index, item) in serieInfo.enumerated() {
+          let seasonName = item["comment"]
+            //.replace('<b>', '').replace('</b>', '')
+
+          let episodes: [[String: String]] = []
+          //json.dumps(episodes)
+            //item["playlist"]
+
+          data.append(["type": "season", "id": path, "name": seasonName, "serieName": name, "season": index+1,
+                       "thumb": thumb, "episodes": episodes])
+        }
+
+      case "Episodes":
+        print("episodes")
+
+//        episode_name = episode['comment'].replace('<br>', ' ')
+//      thumb = params['thumb']
+//      url = episode['file']
 //
-//      case "Episodes":
+//      new_params = {
+//      'type': 'episode',
+//      'id': json.dumps(url),
+//      'name': episode_name,
+//      'serieName': params['serieName'],
+//      'thumb': thumb,
+//      'season': params['season'],
+//      'episode': episode,
+//      'episodeNumber': index+1
+//    }
+
 //        result = try service.getEpisodes(selectedItem!.parentId!, seasonNumber: selectedItem!.id!, thumb: selectedItem?.thumb)
-//
+
       case "Search":
         if !identifier!.isEmpty {
           result = try service.search(identifier!, page: currentPage)["movies"] as! [Any]

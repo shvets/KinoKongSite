@@ -4,11 +4,11 @@ import WebAPI
 import TVSetKit
 
 class KinoKongMediaItem: MediaItem {
-//  let service = KinoKongService.shared
-//
-//  override func isContainer() -> Bool {
-//    return type == "serie" || type == "season"
-//  }
+  let service = KinoKongService.shared
+
+  override func isContainer() -> Bool {
+    return type == "serie" || type == "season"
+  }
 
 //  override func resolveType() {
 //    var serial = false
@@ -27,24 +27,27 @@ class KinoKongMediaItem: MediaItem {
 //      type = "movie"
 //    }
 //  }
-//
-//  override func getBitrates() throws -> [[String: Any]] {
-//    let urls = try service.getUrls(id!, season: seasonNumber!, episode: episodeNumber!)
-//
-//    let qualityLevels = QualityLevel.availableLevels(urls.count)
-//
-//    var bitrates: [[String: Any]] = []
-//
-//    for (index, item) in urls.enumerated() {
-//      var bitrate: [String: Any] = [:]
-//      bitrate["id"] = item["bandwidth"]
-//
-//      bitrate["name"] = qualityLevels[index].rawValue
-//
-//      bitrates.append(bitrate)
-//    }
-//
-//    return bitrates
-//  }
+
+  override func getBitrates() throws -> [[String: Any]] {
+    var bitrates: [[String: Any]] = []
+
+    let urls = try service.getUrls(id!)
+
+    let qualityLevels = QualityLevel.availableLevels(urls.count)
+
+    for (index, url) in urls.enumerated() {
+      let metadata = service.getMetadata(url)
+
+      var bitrate: [String: Any] = [:]
+      bitrate["id"] = metadata["width"]
+      bitrate["url"] = url
+
+      bitrate["name"] = qualityLevels[index].rawValue
+
+      bitrates.append(bitrate)
+    }
+
+    return bitrates
+  }
 
 }

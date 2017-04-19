@@ -83,7 +83,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     let id = params["id"] as! String
     let mediaItem = params["item"] as! MediaItem
 
-    let urls: [String] = try service.getUrls(id)
+    //let urls: [String] = try service.getUrls(id)
       //try service.getUrls(id, season: mediaItem.seasonNumber!, episode: mediaItem.episodeNumber!)
 
 //    var newUrls: [String] = []
@@ -94,7 +94,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
 //
 //    return newUrls[0]
 
-    return urls[0]
+    return (params["bitrate"] as! [String: String])["url"]!
   }
 
 //  override func retrieveExtraInfo(_ item: MediaItem) throws {
