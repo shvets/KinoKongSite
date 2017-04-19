@@ -4,15 +4,15 @@ import SwiftSoup
 import WebAPI
 import TVSetKit
 
-class PopularGroupTableViewController: KinoKongBaseTableViewController {
+class PopularGroupController: KinoKongBaseCollectionViewController {
   static let SegueIdentifier = "Popular Group"
 
   override open var CellIdentifier: String { return "PopularGroupTableCell" }
 
   let POPULAR_MENU = [
-    "Movies",
-    "Series",
-    "Anime"
+      "Movies",
+      "Series",
+      "Anime"
   ]
 
   override func viewDidLoad() {
@@ -23,7 +23,7 @@ class PopularGroupTableViewController: KinoKongBaseTableViewController {
     loadInitialData()
   }
 
-  override open func navigate(from view: UITableViewCell) {
+  override open func tapped(_ gesture: UITapGestureRecognizer) {
     performSegue(withIdentifier: GenresController.SegueIdentifier, sender: view)
   }
 
@@ -34,22 +34,22 @@ class PopularGroupTableViewController: KinoKongBaseTableViewController {
       switch identifier {
         case GenresController.SegueIdentifier:
           if let destination = segue.destination as? GenresTableViewController,
-             let selectedCell = sender as? MediaNameTableCell {
+             let selectedCell = sender as? MediaNameCell {
             adapter.requestType = "Genres Group"
 
             let mediaItem = getItem(for: selectedCell)
 
             switch mediaItem.name! {
-              case "Movies":
-                adapter.parentId = "films"
+            case "Movies":
+              adapter.parentId = "films"
 
-              case "Series":
-                adapter.parentId = "serial"
+            case "Series":
+              adapter.parentId = "serial"
 
-              case "Anime":
-                adapter.parentId = "anime"
+            case "Anime":
+              adapter.parentId = "anime"
 
-              default: break
+            default: break
             }
 
             destination.adapter = adapter

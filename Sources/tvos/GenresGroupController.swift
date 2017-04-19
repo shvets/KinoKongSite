@@ -10,13 +10,10 @@ class GenresGroupController: KinoKongBaseCollectionViewController {
   override open var CellIdentifier: String { return "GenreGroupCell" }
 
   let GENRES_MENU = [
-    "Family",
-    "Crime",
-    "Fiction",
-    "Education"
+    "Movies",
+    "Series",
+    "Anime"
   ]
-
-  var document: Document?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,17 +48,26 @@ class GenresGroupController: KinoKongBaseCollectionViewController {
     if let identifier = segue.identifier {
       switch identifier {
         case GenresController.SegueIdentifier:
-          if let destination = segue.destination as? GenresController,
+          if let destination = segue.destination as? GenresTableViewController,
              let selectedCell = sender as? MediaNameCell {
-            adapter.requestType = "Genres"
+            adapter.requestType = "Genres Group"
 
             let mediaItem = getItem(for: selectedCell)
 
-            adapter.parentId = mediaItem.name
-            adapter.parentName = localizer.localize(mediaItem.name!)
+            switch mediaItem.name! {
+              case "Movies":
+                adapter.parentId = "films"
+
+              case "Series":
+                adapter.parentId = "serial"
+
+              case "Anime":
+                adapter.parentId = "anime"
+
+              default: break
+            }
 
             destination.adapter = adapter
-            destination.document = document
           }
 
         default: break

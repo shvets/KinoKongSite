@@ -23,32 +23,22 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
 
     collectionView?.collectionViewLayout = layout
 
-    adapter = KinoKongServiceAdapter()
-
     self.clearsSelectionOnViewWillAppear = false
 
     loadData()
-//    for name in MainMenuItems {
-//      let item = MediaItem(name: name)
-//
-//      items.append(item)
-//    }
-
-    do {
-      document = try service.fetchDocument(KinoKongAPI.SiteUrl)
-    }
-    catch {
-      print("Cannot load document")
-    }
   }
 
   func loadData() {
     items.append(MediaItem(name: "Bookmarks", imageName: "Star"))
     items.append(MediaItem(name: "History", imageName: "Bookmark"))
     items.append(MediaItem(name: "All Movies", imageName: "Retro TV"))
+    items.append(MediaItem(name: "New Movies", imageName: "Retro TV"))
+    items.append(MediaItem(name: "All Series", imageName: "Retro TV"))
+    items.append(MediaItem(name: "Animations", imageName: "Retro TV"))
+    items.append(MediaItem(name: "Anime", imageName: "Retro TV"))
+    items.append(MediaItem(name: "Shows", imageName: "Briefcase"))
     items.append(MediaItem(name: "Genres", imageName: "Comedy"))
-    items.append(MediaItem(name: "Themes", imageName: "Briefcase"))
-    items.append(MediaItem(name: "Filters", imageName: "Filter"))
+    items.append(MediaItem(name: "Popular", imageName: "Briefcase"))
     items.append(MediaItem(name: "Settings", imageName: "Engineering"))
     items.append(MediaItem(name: "Search", imageName: "Search"))
   }
@@ -60,11 +50,8 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
       case "Genres":
         performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
 
-//      case "Themes":
-//        performSegue(withIdentifier: ThemesController.SegueIdentifier, sender: view)
-//
-//      case "Filters":
-//        performSegue(withIdentifier: FiltersController.SegueIdentifier, sender: view)
+      case "Popular":
+        performSegue(withIdentifier: PopularController.SegueIdentifier, sender: view)
 
       case "Settings":
         performSegue(withIdentifier: "Settings", sender: view)
@@ -82,20 +69,13 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
   override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
       switch identifier {
-//        case GenresGroupController.SegueIdentifier:
-//          if let destination = segue.destination as? GenresGroupController {
-//            destination.document = document
-//          }
+        case PopularController.SegueIdentifier:
+          if let destination = segue.destination as? PopularController {
+            let adapter = KinoKongServiceAdapter(mobile: true)
+            adapter.requestType = "Popular"
 
-//        case ThemesController.SegueIdentifier:
-//          if let destination = segue.destination as? ThemesController {
-//            destination.document = document
-//          }
-//
-//        case FiltersController.SegueIdentifier:
-//          if let destination = segue.destination as? FiltersController {
-//            destination.document = document
-//          }
+            destination.adapter = adapter
+          }
 
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,
