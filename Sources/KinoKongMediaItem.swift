@@ -6,6 +6,31 @@ import TVSetKit
 class KinoKongMediaItem: MediaItem {
   let service = KinoKongService.shared
 
+  var episodes = [JSON]()
+
+  override init(data: JSON) {
+    super.init(data: data)
+
+//    self.seasonNumber = data["seasonNumber"].stringValue
+//    self.episodeNumber = data["episodeNumber"].stringValue
+
+    self.episodes = []
+
+    let episodes = data["episodes"].arrayValue
+
+    for episode in episodes {
+      self.episodes.append(episode)
+    }
+//
+//    self.items = []
+//
+//    let items = data["items"].arrayValue
+//
+//    for item in items {
+//      self.items.append(item)
+//    }
+  }
+
   override func isContainer() -> Bool {
     return type == "serie" || type == "season"
   }
@@ -36,6 +61,7 @@ class KinoKongMediaItem: MediaItem {
     let qualityLevels = QualityLevel.availableLevels(urls.count)
 
     for (index, url) in urls.enumerated() {
+      print(url)
       let metadata = service.getMetadata(url)
 
       var bitrate: [String: Any] = [:]

@@ -14,6 +14,8 @@ class KinoKongDataSource: DataSource {
     let history = params.history!
     let selectedItem = params.selectedItem
 
+    var episodes = [JSON]()
+
     var request = requestType
 
     print(selectedItem?.type)
@@ -23,6 +25,8 @@ class KinoKongDataSource: DataSource {
     }
     else if selectedItem?.type == "season" {
       request = "Episodes"
+
+      episodes = (selectedItem as! KinoKongMediaItem).episodes
     }
 
     switch request {
@@ -80,29 +84,30 @@ class KinoKongDataSource: DataSource {
         }
 
       case "Seasons":
-        let path = ""
-        let name = ""
-        let thumb = ""
-        let playlistUrl = try service.getSeriePlaylistUrl(path)
-        let serieInfo = try service.getSerieInfo(playlistUrl)
+        if let selectedItem = selectedItem {
+          let path = selectedItem.id
+          let name = selectedItem.name
+          let thumb = selectedItem.thumb
+          let playlistUrl = try service.getSeriePlaylistUrl(path!)
+          let serieInfo = try service.getSerieInfo(playlistUrl)
 
-        var data = [Any]()
+          //var data = [Any]()
 
-        for (index, item) in serieInfo.enumerated() {
-          let seasonName = item["comment"]
+          for (index, item) in serieInfo.enumerated() {
+            let seasonName = item["comment"]
             //.replace('<b>', '').replace('</b>', '')
 
-          let episodes: [[String: String]] = []
-          //json.dumps(episodes)
-            //item["playlist"]
+            let episodes = JSON(item["playlist"])
 
-          data.append(["type": "season", "id": path, "name": seasonName, "serieName": name, "season": index+1,
-                       "thumb": thumb, "episodes": episodes])
+            result.append(["type": "season", "id": path, "name": seasonName, "serieName": name, "season": index+1,
+                         "thumb": thumb, "episodes": episodes])
+          }
         }
 
       case "Episodes":
         print("episodes")
 
+        result = episodes
 //        episode_name = episode['comment'].replace('<br>', ' ')
 //      thumb = params['thumb']
 //      url = episode['file']
