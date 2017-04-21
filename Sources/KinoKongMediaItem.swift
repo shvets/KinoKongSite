@@ -56,7 +56,14 @@ class KinoKongMediaItem: MediaItem {
   override func getBitrates() throws -> [[String: Any]] {
     var bitrates: [[String: Any]] = []
 
-    let urls = try service.getUrls(id!)
+    var urls: [String] = []
+
+    if type == "episode" {
+      urls = [id!]
+    }
+    else {
+      urls = try service.getUrls(id!)
+    }
 
     let qualityLevels = QualityLevel.availableLevels(urls.count)
 

@@ -22,14 +22,12 @@
 		FAAFE5041EA6E2C10092387A /* KinoKongBaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4FC1EA6E2C10092387A /* KinoKongBaseCollectionViewController.swift */; };
 		FAAFE5051EA6E2C10092387A /* KinoKongController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4FD1EA6E2C10092387A /* KinoKongController.swift */; };
 		FAAFE5061EA6E2C20092387A /* PopularController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4FE1EA6E2C10092387A /* PopularController.swift */; };
-		FAAFE5071EA6E2C20092387A /* PopularGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE4FF1EA6E2C10092387A /* PopularGroupController.swift */; };
 		FAAFE5081EA6E2C20092387A /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE5001EA6E2C10092387A /* SearchController.swift */; };
 		FAAFE5091EA6E2C20092387A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE5011EA6E2C10092387A /* SettingsController.swift */; };
 		FAAFE5121EA6E2CC0092387A /* GenresGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50A1EA6E2CC0092387A /* GenresGroupTableViewController.swift */; };
 		FAAFE5131EA6E2CC0092387A /* GenresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50B1EA6E2CC0092387A /* GenresTableViewController.swift */; };
 		FAAFE5141EA6E2CC0092387A /* KinoKongBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50C1EA6E2CC0092387A /* KinoKongBaseTableViewController.swift */; };
 		FAAFE5151EA6E2CC0092387A /* KinoKongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50D1EA6E2CC0092387A /* KinoKongTableViewController.swift */; };
-		FAAFE5161EA6E2CC0092387A /* PopularGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50E1EA6E2CC0092387A /* PopularGroupTableViewController.swift */; };
 		FAAFE5171EA6E2CC0092387A /* PopularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50F1EA6E2CC0092387A /* PopularTableViewController.swift */; };
 		FAAFE5181EA6E2CC0092387A /* SearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE5101EA6E2CC0092387A /* SearchTableController.swift */; };
 		FAAFE5191EA6E2CC0092387A /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE5111EA6E2CC0092387A /* SettingsTableController.swift */; };
@@ -58,14 +56,12 @@
 		FAAFE4FC1EA6E2C10092387A /* KinoKongBaseCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongBaseCollectionViewController.swift; sourceTree = "<group>"; };
 		FAAFE4FD1EA6E2C10092387A /* KinoKongController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongController.swift; sourceTree = "<group>"; };
 		FAAFE4FE1EA6E2C10092387A /* PopularController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularController.swift; sourceTree = "<group>"; };
-		FAAFE4FF1EA6E2C10092387A /* PopularGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularGroupController.swift; sourceTree = "<group>"; };
 		FAAFE5001EA6E2C10092387A /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		FAAFE5011EA6E2C10092387A /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		FAAFE50A1EA6E2CC0092387A /* GenresGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenresGroupTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE50B1EA6E2CC0092387A /* GenresTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenresTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE50C1EA6E2CC0092387A /* KinoKongBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongBaseTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE50D1EA6E2CC0092387A /* KinoKongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongTableViewController.swift; sourceTree = "<group>"; };
-		FAAFE50E1EA6E2CC0092387A /* PopularGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularGroupTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE50F1EA6E2CC0092387A /* PopularTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE5101EA6E2CC0092387A /* SearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableController.swift; sourceTree = "<group>"; };
 		FAAFE5111EA6E2CC0092387A /* SettingsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableController.swift; sourceTree = "<group>"; };
@@ -149,7 +145,6 @@
 				FAAFE50B1EA6E2CC0092387A /* GenresTableViewController.swift */,
 				FAAFE50C1EA6E2CC0092387A /* KinoKongBaseTableViewController.swift */,
 				FAAFE50D1EA6E2CC0092387A /* KinoKongTableViewController.swift */,
-				FAAFE50E1EA6E2CC0092387A /* PopularGroupTableViewController.swift */,
 				FAAFE50F1EA6E2CC0092387A /* PopularTableViewController.swift */,
 				FAAFE5101EA6E2CC0092387A /* SearchTableController.swift */,
 				FAAFE5111EA6E2CC0092387A /* SettingsTableController.swift */,
@@ -165,7 +160,6 @@
 				FAAFE4FC1EA6E2C10092387A /* KinoKongBaseCollectionViewController.swift */,
 				FAAFE4FD1EA6E2C10092387A /* KinoKongController.swift */,
 				FAAFE4FE1EA6E2C10092387A /* PopularController.swift */,
-				FAAFE4FF1EA6E2C10092387A /* PopularGroupController.swift */,
 				FAAFE5001EA6E2C10092387A /* SearchController.swift */,
 				FAAFE5011EA6E2C10092387A /* SettingsController.swift */,
 			);
@@ -258,7 +252,6 @@
 				FAAFE5091EA6E2C20092387A /* SettingsController.swift in Sources */,
 				FAAFE5041EA6E2C10092387A /* KinoKongBaseCollectionViewController.swift in Sources */,
 				FAAFE5141EA6E2CC0092387A /* KinoKongBaseTableViewController.swift in Sources */,
-				FAAFE5161EA6E2CC0092387A /* PopularGroupTableViewController.swift in Sources */,
 				FAAFE5171EA6E2CC0092387A /* PopularTableViewController.swift in Sources */,
 				FAAFE5211EA6E2D90092387A /* KinoKongServiceAdapter.swift in Sources */,
 				FAAFE5191EA6E2CC0092387A /* SettingsTableController.swift in Sources */,
@@ -272,7 +265,6 @@
 				FAAFE51E1EA6E2D90092387A /* KinoKongDataSource.swift in Sources */,
 				FAAFE5181EA6E2CC0092387A /* SearchTableController.swift in Sources */,
 				FAAFE51F1EA6E2D90092387A /* KinoKongMediaItem.swift in Sources */,
-				FAAFE5071EA6E2C20092387A /* PopularGroupController.swift in Sources */,
 				FAAFE5201EA6E2D90092387A /* KinoKongService.swift in Sources */,
 				FAAFE5121EA6E2CC0092387A /* GenresGroupTableViewController.swift in Sources */,
 			);

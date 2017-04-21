@@ -14,6 +14,9 @@ class PopularTableViewController: KinoKongBaseTableViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
+    tableView?.backgroundView = activityIndicatorView
+    adapter.spinner = PlainSpinner(activityIndicatorView)
+
     loadInitialData()
   }
 

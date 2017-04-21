@@ -18,8 +18,6 @@ class KinoKongDataSource: DataSource {
 
     var request = requestType
 
-    print(selectedItem?.type)
-
     if selectedItem?.type == "serie" {
       request = "Seasons"
     }
@@ -84,46 +82,14 @@ class KinoKongDataSource: DataSource {
         }
 
       case "Seasons":
-        if let selectedItem = selectedItem {
-          let path = selectedItem.id
-          let name = selectedItem.name
-          let thumb = selectedItem.thumb
-          let playlistUrl = try service.getSeriePlaylistUrl(path!)
-          let serieInfo = try service.getSerieInfo(playlistUrl)
+        let path = selectedItem!.id!
+        let name = selectedItem!.name!
+        let thumb = selectedItem!.thumb!
 
-          //var data = [Any]()
-
-          for (index, item) in serieInfo.enumerated() {
-            let seasonName = item["comment"]
-            //.replace('<b>', '').replace('</b>', '')
-
-            let episodes = JSON(item["playlist"])
-
-            result.append(["type": "season", "id": path, "name": seasonName, "serieName": name, "season": index+1,
-                         "thumb": thumb, "episodes": episodes])
-          }
-        }
+        result = try service.getSeasons(path: path, serieName: name, thumb: thumb)
 
       case "Episodes":
-        print("episodes")
-
         result = episodes
-//        episode_name = episode['comment'].replace('<br>', ' ')
-//      thumb = params['thumb']
-//      url = episode['file']
-//
-//      new_params = {
-//      'type': 'episode',
-//      'id': json.dumps(url),
-//      'name': episode_name,
-//      'serieName': params['serieName'],
-//      'thumb': thumb,
-//      'season': params['season'],
-//      'episode': episode,
-//      'episodeNumber': index+1
-//    }
-
-//        result = try service.getEpisodes(selectedItem!.parentId!, seasonNumber: selectedItem!.id!, thumb: selectedItem?.thumb)
 
       case "Search":
         if !identifier!.isEmpty {
