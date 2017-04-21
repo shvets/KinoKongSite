@@ -43,7 +43,7 @@ class KinoKongDataSource: DataSource {
         result = try service.getAllMovies(page: currentPage)["movies"] as! [Any]
 
       case "New Movies":
-         result = try service.getNewMovies(page: currentPage)["movies"] as! [Any]
+        result = try service.getNewMovies(page: currentPage)["movies"] as! [Any]
 
       case "All Series":
         result = try service.getAllSeries(page: currentPage)["movies"] as! [Any]

@@ -33,12 +33,6 @@ class GenresController: KinoKongBaseCollectionViewController {
     performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
   }
 
-//  override public func tapped(_ gesture: UITapGestureRecognizer) {
-//    let selectedCell = gesture.view as! MediaNameCell
-//
-//    let controller = MediaItemsController.instantiate(adapter).getActionController()
-//    let destination = controller as! MediaItemsController
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
       switch identifier {
@@ -46,12 +40,13 @@ class GenresController: KinoKongBaseCollectionViewController {
           if let destination = segue.destination.getActionController() as? MediaItemsController,
              let view = sender as? MediaNameCell {
 
-            let adapter = KinoKongServiceAdapter(mobile: true)
+            let adapter = KinoKongServiceAdapter()
 
             adapter.requestType = "Genres"
             adapter.selectedItem = getItem(for: view)
 
             destination.adapter = adapter
+            destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
           }
 
         default: break

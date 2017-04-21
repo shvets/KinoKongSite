@@ -48,7 +48,7 @@ class GenresGroupController: KinoKongBaseCollectionViewController {
     if let identifier = segue.identifier {
       switch identifier {
         case GenresController.SegueIdentifier:
-          if let destination = segue.destination as? GenresTableViewController,
+          if let destination = segue.destination as? GenresController,
              let selectedCell = sender as? MediaNameCell {
             adapter.requestType = "Genres Group"
 

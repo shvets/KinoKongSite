@@ -14,13 +14,22 @@ class PopularController: KinoKongBaseCollectionViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
+    let layout = UICollectionViewFlowLayout()
+
+    layout.itemSize = CGSize(width: 450, height: 150)
+    layout.sectionInset = UIEdgeInsets(top: 150.0, left: 20.0, bottom: 50.0, right: 20.0)
+    layout.minimumInteritemSpacing = 20.0
+    layout.minimumLineSpacing = 100.0
+
+    collectionView?.collectionViewLayout = layout
+
     collectionView?.backgroundView = activityIndicatorView
     adapter.spinner = PlainSpinner(activityIndicatorView)
 
     loadInitialData()
   }
 
-  override open func tapped(_ gesture: UITapGestureRecognizer) {
+  override open func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
     performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
   }
 
@@ -31,12 +40,13 @@ class PopularController: KinoKongBaseCollectionViewController {
           if let destination = segue.destination.getActionController() as? MediaItemsController,
              let view = sender as? MediaNameCell {
 
-            let adapter = KinoKongServiceAdapter(mobile: true)
+            let adapter = KinoKongServiceAdapter()
 
             adapter.requestType = "Rating"
             adapter.selectedItem = getItem(for: view)
 
             destination.adapter = adapter
+            destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
           }
 
         default: break

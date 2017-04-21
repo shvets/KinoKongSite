@@ -25,7 +25,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     history.load()
 
     pageSize = 15
-    rowSize = 3
+    rowSize = 5
   }
 
   override open func clone() -> ServiceAdapter {
@@ -65,10 +65,10 @@ class KinoKongServiceAdapter: ServiceAdapter {
   override func buildLayout() -> UICollectionViewFlowLayout? {
     let layout = UICollectionViewFlowLayout()
 
-    layout.itemSize = CGSize(width: 200*1.2, height: 300*1.2) // 200 x 300
+    layout.itemSize = CGSize(width: 180*1.6, height: 248*1.6) // 180 x 248
     layout.sectionInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 120.0, right: 40.0)
     layout.minimumInteritemSpacing = 40.0
-    layout.minimumLineSpacing = 140.0
+    layout.minimumLineSpacing = 90.0
 
     layout.headerReferenceSize = CGSize(width: 500, height: 75)
 
@@ -76,24 +76,10 @@ class KinoKongServiceAdapter: ServiceAdapter {
   }
 
   override func getDetailsImageFrame() -> CGRect? {
-    return CGRect(x: 40, y: 40, width: 210*2.7, height: 300*2.7)
+    return CGRect(x: 40, y: 40, width: 180*2.7, height: 248*2.7)
   }
 
   override func getUrl(_ params: [String: Any]) throws -> String {
-//    let id = params["id"] as! String
-//    let mediaItem = params["item"] as! MediaItem
-
-    //let urls: [String] = try service.getUrls(id)
-      //try service.getUrls(id, season: mediaItem.seasonNumber!, episode: mediaItem.episodeNumber!)
-
-//    var newUrls: [String] = []
-//
-//    for url in urls {
-//      newUrls.append(url["url"]!)
-//    }
-//
-//    return newUrls[0]
-
     let bitrate = params["bitrate"] as! [String: String]
 
     let url = bitrate["url"]

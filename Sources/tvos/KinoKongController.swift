@@ -71,12 +71,12 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
       switch identifier {
         case PopularController.SegueIdentifier:
           if let destination = segue.destination as? PopularController {
-            let adapter = KinoKongServiceAdapter(mobile: true)
+            let adapter = KinoKongServiceAdapter()
             adapter.requestType = "Popular"
 
             destination.adapter = adapter
           }
-
+        
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,
              let view = sender as? MediaNameCell {
