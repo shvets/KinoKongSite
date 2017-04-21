@@ -18,7 +18,10 @@ class KinoKongDataSource: DataSource {
 
     var request = requestType
 
-    if selectedItem?.type == "serie" {
+    if selectedItem?.type == "rating" {
+      request = "Seasons"
+    }
+    else if selectedItem?.type == "serie" {
       request = "Seasons"
     }
     else if selectedItem?.type == "season" {

@@ -32,7 +32,7 @@ class KinoKongMediaItem: MediaItem {
   }
 
   override func isContainer() -> Bool {
-    return type == "serie" || type == "season"
+    return type == "serie" || type == "season" || type == "rating"
   }
 
 //  override func resolveType() {
