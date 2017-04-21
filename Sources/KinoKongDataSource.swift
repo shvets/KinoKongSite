@@ -89,7 +89,7 @@ class KinoKongDataSource: DataSource {
         let name = selectedItem!.name!
         let thumb = selectedItem!.thumb!
 
-        result = try service.getSeasons(path: path, serieName: name, thumb: thumb)
+        result = try service.getSeasons(path, serieName: name, thumb: thumb)
 
       case "Episodes":
         result = episodes

@@ -23,6 +23,9 @@ class GenresController: KinoKongBaseCollectionViewController {
 
     collectionView?.collectionViewLayout = layout
 
+    collectionView?.backgroundView = activityIndicatorView
+    adapter.spinner = PlainSpinner(activityIndicatorView)
+
     loadInitialData()
   }
 

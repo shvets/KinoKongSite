@@ -14,6 +14,9 @@ class PopularController: KinoKongBaseCollectionViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
+    collectionView?.backgroundView = activityIndicatorView
+    adapter.spinner = PlainSpinner(activityIndicatorView)
+
     loadInitialData()
   }
 
