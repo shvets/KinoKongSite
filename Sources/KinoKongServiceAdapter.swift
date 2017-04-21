@@ -68,7 +68,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     layout.itemSize = CGSize(width: 180*1.6, height: 248*1.6) // 180 x 248
     layout.sectionInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 120.0, right: 40.0)
     layout.minimumInteritemSpacing = 40.0
-    layout.minimumLineSpacing = 90.0
+    layout.minimumLineSpacing = 85.0
 
     layout.headerReferenceSize = CGSize(width: 500, height: 75)
 
@@ -86,44 +86,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
 
     return url!
   }
-
-//  override func retrieveExtraInfo(_ item: MediaItem) throws {
-//    let movieUrl = item.id!
-//
-//    if item.type == "movie" {
-//      let document = try service.fetchDocument(movieUrl)
-//
-//      let mediaData = try service.getMediaData(document!)
-//
-//      var text = ""
-//
-//      if let year = mediaData["year"] as? String {
-//        text += "\(year)\n"
-//      }
-//
-//      if let countries = mediaData["countries"] as? [String] {
-//        let txt = countries.joined(separator: ", ")
-//
-//        text += "\(txt)\n"
-//      }
-//
-//      if let duration = mediaData["duration"] as? String {
-//        text += "\(duration)\n\n"
-//      }
-//
-//      if let tags = mediaData["tags"] as? [String] {
-//        let txt = tags.joined(separator: ", ")
-//
-//        text += "\(txt)\n"
-//      }
-//
-//      if let summary = mediaData["summary"] as? String {
-//        text += "\(summary)\n"
-//      }
-//
-//      item.description = text
-//    }
-//  }
 
   override func addBookmark(item: MediaItem) -> Bool {
     return bookmarks.addBookmark(item: item)
