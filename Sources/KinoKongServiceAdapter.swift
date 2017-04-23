@@ -24,8 +24,12 @@ class KinoKongServiceAdapter: ServiceAdapter {
     bookmarks.load()
     history.load()
 
-    pageSize = 15
-    rowSize = 5
+    pageLoader.pageSize = 15
+    pageLoader.rowSize = 5
+
+    pageLoader.load = {
+      return try self.load()
+    }
   }
 
   override open func clone() -> ServiceAdapter {
@@ -55,7 +59,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     params.selectedItem = selectedItem
 
     if let requestType = requestType {
-      return try dataSource.load(requestType, params: params, pageSize: pageSize!, currentPage: currentPage)
+      return try dataSource.load(requestType, params: params, pageSize: pageLoader.pageSize!, currentPage: pageLoader.currentPage)
     }
     else {
       return []
