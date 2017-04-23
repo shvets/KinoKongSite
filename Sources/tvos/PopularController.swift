@@ -24,7 +24,7 @@ class PopularController: KinoKongBaseCollectionViewController {
     collectionView?.collectionViewLayout = layout
 
     collectionView?.backgroundView = activityIndicatorView
-    adapter.spinner = PlainSpinner(activityIndicatorView)
+    adapter.pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
     loadInitialData()
   }

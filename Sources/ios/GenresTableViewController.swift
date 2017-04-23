@@ -15,7 +15,7 @@ class GenresTableViewController: KinoKongBaseTableViewController {
     self.clearsSelectionOnViewWillAppear = false
 
     tableView?.backgroundView = activityIndicatorView
-    adapter.spinner = PlainSpinner(activityIndicatorView)
+    adapter.pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
     loadInitialData()
   }
