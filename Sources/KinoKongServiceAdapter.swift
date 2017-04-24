@@ -30,6 +30,8 @@ class KinoKongServiceAdapter: ServiceAdapter {
     pageLoader.load = {
       return try self.load()
     }
+
+    dataSource = KinoKongDataSource()
   }
 
   override open func clone() -> ServiceAdapter {
@@ -47,9 +49,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
       bundleId: KinoKongServiceAdapter.BundleId)
   }
 
-  override func load() throws -> [MediaItem] {
-    let dataSource = KinoKongDataSource()
-
+  override func load() throws -> [Any] {
     var params = RequestParams()
 
     params.identifier = requestType == "Search" ? query : parentId
@@ -58,8 +58,9 @@ class KinoKongServiceAdapter: ServiceAdapter {
     params.history = history
     params.selectedItem = selectedItem
 
-    if let requestType = requestType {
-      return try dataSource.load(requestType, params: params, pageSize: pageLoader.pageSize!, currentPage: pageLoader.currentPage)
+    if let requestType = requestType, let dataSource = dataSource {
+      return try dataSource.load(requestType, params: params, pageSize: pageLoader.pageSize!,
+        currentPage: pageLoader.currentPage, convert: true)
     }
     else {
       return []
