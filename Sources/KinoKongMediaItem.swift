@@ -39,7 +39,6 @@ class KinoKongMediaItem: MediaItem {
     let qualityLevels = QualityLevel.availableLevels(urls.count)
 
     for (index, url) in urls.enumerated() {
-      print(url)
       let metadata = service.getMetadata(url)
 
       var bitrate: [String: Any] = [:]
