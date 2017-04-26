@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA6C12871EB04B9800DA4A90 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6C12861EB04B9800DA4A90 /* Alamofire.framework */; };
 		FA9BF8331EA3F1DE002F7D52 /* KinoKongSite.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9BF8311EA3F1DE002F7D52 /* KinoKongSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAAFE4821EA3F2CC0092387A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAAFE4841EA3F2CC0092387A /* Localizable.strings */; };
-		FAAFE4961EA3F42C0092387A /* Just.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE48E1EA3F42C0092387A /* Just.framework */; };
 		FAAFE4971EA3F42C0092387A /* Runglish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE48F1EA3F42C0092387A /* Runglish.framework */; };
 		FAAFE4981EA3F42C0092387A /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE4901EA3F42C0092387A /* SwiftSoup.framework */; };
 		FAAFE4991EA3F42C0092387A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFE4911EA3F42C0092387A /* SwiftyJSON.framework */; };
@@ -38,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA6C12861EB04B9800DA4A90 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/EtvnetApp-auvgeykttffxrlaelzqpbfeqnwis/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		FA9BF82E1EA3F1DE002F7D52 /* KinoKongSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinoKongSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9BF8311EA3F1DE002F7D52 /* KinoKongSite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinoKongSite.h; sourceTree = "<group>"; };
 		FA9BF8321EA3F1DE002F7D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAAFE4961EA3F42C0092387A /* Just.framework in Frameworks */,
+				FA6C12871EB04B9800DA4A90 /* Alamofire.framework in Frameworks */,
 				FAAFE4971EA3F42C0092387A /* Runglish.framework in Frameworks */,
 				FAAFE4981EA3F42C0092387A /* SwiftSoup.framework in Frameworks */,
 				FAAFE4991EA3F42C0092387A /* SwiftyJSON.framework in Frameworks */,
@@ -126,6 +127,7 @@
 		FAAFE48D1EA3F42B0092387A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA6C12861EB04B9800DA4A90 /* Alamofire.framework */,
 				FAAFE48E1EA3F42C0092387A /* Just.framework */,
 				FAAFE48F1EA3F42C0092387A /* Runglish.framework */,
 				FAAFE4901EA3F42C0092387A /* SwiftSoup.framework */,
