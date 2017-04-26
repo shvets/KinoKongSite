@@ -87,9 +87,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
   override func getUrl(_ params: [String: Any]) throws -> String {
     let bitrate = params["bitrate"] as! [String: String]
 
-    let url = bitrate["url"]
-
-    return url!
+    return bitrate["url"]!
   }
 
   override func addBookmark(item: MediaItem) -> Bool {
