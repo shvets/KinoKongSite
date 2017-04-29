@@ -5,8 +5,6 @@ import WebAPI
 import TVSetKit
 
 class KinoKongServiceAdapter: ServiceAdapter {
-  let service = KinoKongService.shared
-
   static let bookmarksFileName = NSHomeDirectory() + "/Library/Caches/kinokong-bookmarks.json"
   static let historyFileName = NSHomeDirectory() + "/Library/Caches/kinokong-history.json"
 
