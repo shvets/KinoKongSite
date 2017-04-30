@@ -42,8 +42,8 @@ class PopularController: KinoKongBaseCollectionViewController {
 
             let adapter = KinoKongServiceAdapter()
 
-            adapter.requestType = "Rating"
-            adapter.selectedItem = getItem(for: view)
+            adapter.params.requestType = "Rating"
+            adapter.params.selectedItem = getItem(for: view)
 
             destination.adapter = adapter
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!

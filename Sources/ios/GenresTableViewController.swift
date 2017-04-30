@@ -35,8 +35,8 @@ class GenresTableViewController: KinoKongBaseTableViewController {
 
             let adapter = KinoKongServiceAdapter(mobile: true)
 
-            adapter.requestType = "Genres"
-            adapter.selectedItem = getItem(for: view)
+            adapter.params.requestType = "Genres"
+            adapter.params.selectedItem = getItem(for: view)
 
             destination.adapter = adapter
           }
