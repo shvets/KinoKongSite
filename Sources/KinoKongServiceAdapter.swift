@@ -16,8 +16,8 @@ class KinoKongServiceAdapter: ServiceAdapter {
 
   var episodes: [JSON]?
 
-  public override init(mobile: Bool=false) {
-    super.init(mobile: mobile)
+  public init(mobile: Bool=false) {
+    super.init(dataSource: KinoKongDataSource(), mobile: mobile)
     
     bookmarks.load()
     history.load()
@@ -28,8 +28,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
     pageLoader.load = {
       return try self.load()
     }
-
-    dataSource = KinoKongDataSource()
   }
 
   override open func clone() -> ServiceAdapter {
