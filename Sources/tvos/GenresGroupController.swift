@@ -50,19 +50,19 @@ class GenresGroupController: KinoKongBaseCollectionViewController {
         case GenresController.SegueIdentifier:
           if let destination = segue.destination as? GenresController,
              let selectedCell = sender as? MediaNameCell {
-            adapter.params.requestType = "Genres Group"
+            adapter.params["requestType"] = "Genres Group"
 
             let mediaItem = getItem(for: selectedCell)
 
             switch mediaItem.name! {
               case "Movies":
-                adapter.params.parentId = "films"
+                adapter.params["parentId"] = "films"
 
               case "Series":
-                adapter.params.parentId = "serial"
+                adapter.params["parentId"] = "serial"
 
               case "Anime":
-                adapter.params.parentId = "anime"
+                adapter.params["parentId"] = "anime"
 
               default: break
             }

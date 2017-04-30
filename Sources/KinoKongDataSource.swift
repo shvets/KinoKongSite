@@ -9,10 +9,10 @@ class KinoKongDataSource: DataSource {
   func load(_ requestType: String, params: RequestParams, pageSize: Int, currentPage: Int, convert: Bool=true) throws -> [Any] {
     var result: [Any] = []
 
-    let identifier = params.identifier
-    let bookmarks = params.bookmarks!
-    let history = params.history!
-    let selectedItem = params.selectedItem
+    let identifier = params["identifier"] as? String
+    let bookmarks = params["bookmarks"] as! Bookmarks
+    let history = params["history"] as! History
+    let selectedItem = params["selectedItem"] as? MediaItem
 
     var episodes = [JSON]()
 
@@ -60,7 +60,7 @@ class KinoKongDataSource: DataSource {
       case "Genres Group":
         let groupedGenres = try service.getGroupedGenres()
 
-        let genresType = params.identifier!
+        let genresType = params["identifier"] as! String
 
         result = groupedGenres[genresType]!
 

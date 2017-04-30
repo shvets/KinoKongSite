@@ -42,8 +42,8 @@ class GenresController: KinoKongBaseCollectionViewController {
 
             let adapter = KinoKongServiceAdapter()
 
-            adapter.params.requestType = "Genres"
-            adapter.params.selectedItem = getItem(for: view)
+            adapter.params["requestType"] = "Genres"
+            adapter.params["selectedItem"] = getItem(for: view)
 
             destination.adapter = adapter
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!

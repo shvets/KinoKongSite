@@ -72,7 +72,7 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
         case PopularController.SegueIdentifier:
           if let destination = segue.destination as? PopularController {
             let adapter = KinoKongServiceAdapter()
-            adapter.params.requestType = "Popular"
+            adapter.params["requestType"] = "Popular"
 
             destination.adapter = adapter
           }
@@ -85,8 +85,8 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
 
             let adapter = KinoKongServiceAdapter()
 
-            adapter.params.requestType = mediaItem.name
-            adapter.params.parentName = localizer.localize(mediaItem.name!)
+            adapter.params["requestType"] = mediaItem.name
+            adapter.params["parentName"] = localizer.localize(mediaItem.name!)
 
             destination.adapter = adapter
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
@@ -97,8 +97,8 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
 
             let adapter = KinoKongServiceAdapter()
 
-            adapter.params.requestType = "Search"
-            adapter.params.parentName = localizer.localize("Search Results")
+            adapter.params["requestType"] = "Search"
+            adapter.params["parentName"] = localizer.localize("Search Results")
 
             destination.adapter = adapter
           }
