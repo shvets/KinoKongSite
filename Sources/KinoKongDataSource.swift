@@ -9,7 +9,6 @@ class KinoKongDataSource: DataSource {
   override open func load(params: RequestParams) throws -> [Any] {
     var result: [Any] = []
 
-    let identifier = params["identifier"] as? String
     let bookmarks = params["bookmarks"] as! Bookmarks
     let history = params["history"] as! History
     let selectedItem = params["selectedItem"] as? MediaItem
@@ -60,11 +59,11 @@ class KinoKongDataSource: DataSource {
         result = try service.getTvShows(page: currentPage)["movies"] as! [Any]
 
       case "Genres Group":
-        let groupedGenres = try service.getGroupedGenres()
+        if let genresType = params["parentId"] as? String {
+          let groupedGenres = try service.getGroupedGenres()
 
-        let genresType = params["identifier"] as! String
-
-        result = groupedGenres[genresType]!
+          result = groupedGenres[genresType]!
+        }
 
       case "Genres":
         let path = selectedItem!.id
@@ -97,8 +96,10 @@ class KinoKongDataSource: DataSource {
         result = episodes
 
       case "Search":
-        if !identifier!.isEmpty {
-          result = try service.search(identifier!, page: currentPage)["movies"] as! [Any]
+        if let query = params["query"] as? String {
+          if !query.isEmpty {
+            result = try service.search(query, page: currentPage)["movies"] as! [Any]
+          }
         }
 
       default:
