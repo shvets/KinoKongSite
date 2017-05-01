@@ -6,7 +6,7 @@ import TVSetKit
 class KinoKongDataSource: DataSource {
   let service = KinoKongService.shared
 
-  override open func load(pageSize: Int, currentPage: Int, convert: Bool=true) throws -> [Any] {
+  override open func load(convert: Bool=true) throws -> [Any] {
     var result: [Any] = []
 
     let identifier = params["identifier"] as? String
@@ -17,6 +17,8 @@ class KinoKongDataSource: DataSource {
     var episodes = [JSON]()
 
     var request = params["requestType"] as! String
+    //let pageSize = params["pageSize"] as? Int
+    let currentPage = params["currentPage"] as! Int
 
     if selectedItem?.type == "rating" {
       request = "Seasons"
