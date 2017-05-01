@@ -45,7 +45,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
       bundleId: KinoKongServiceAdapter.BundleId)
   }
 
-  override func load() throws -> [Any] {
+  func load() throws -> [Any] {
     if let requestType = params["requestType"], let dataSource = dataSource {
       var newParams = RequestParams()
 
