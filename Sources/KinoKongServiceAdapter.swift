@@ -45,24 +45,16 @@ class KinoKongServiceAdapter: ServiceAdapter {
       bundleId: KinoKongServiceAdapter.BundleId)
   }
 
-  func load() throws -> [Any] {
-    if let requestType = params["requestType"], let dataSource = dataSource {
-      var newParams = RequestParams()
+  override open func load() throws -> [Any] {
+    let requestType = params["requestType"] as? String
+    let query = params["query"] as? String
+    let parentId = params["parentId"] as? String
 
-      newParams["requestType"] = requestType
-      newParams["identifier"] = params["requestType"] as? String == "Search" ? params["query"] as? String : params["parentId"] as? String
-      newParams["parentName"] = params["parentName"]
-      newParams["bookmarks"] = bookmarks
-      newParams["history"] = history
-      newParams["selectedItem"] = params["selectedItem"]
-      newParams["pageSize"] = pageLoader.pageSize
-      newParams["currentPage"] = pageLoader.currentPage
+    params["identifier"] = requestType == "Search" ? query : parentId
+    params["bookmarks"] = bookmarks
+    params["history"] = history
 
-      return try dataSource.load(params: newParams)
-    }
-    else {
-      return []
-    }
+    return try super.load()
   }
 
   override func buildLayout() -> UICollectionViewFlowLayout? {
