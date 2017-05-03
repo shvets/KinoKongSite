@@ -86,7 +86,6 @@ open class KinoKongTableViewController: KinoKongBaseTableViewController {
 
         case SearchTableController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? SearchTableController {
-
             let adapter = KinoKongServiceAdapter(mobile: true)
 
             adapter.params["requestType"] = "Search"

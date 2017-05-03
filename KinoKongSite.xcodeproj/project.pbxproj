@@ -29,7 +29,6 @@
 		FAAFE5141EA6E2CC0092387A /* KinoKongBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50C1EA6E2CC0092387A /* KinoKongBaseTableViewController.swift */; };
 		FAAFE5151EA6E2CC0092387A /* KinoKongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50D1EA6E2CC0092387A /* KinoKongTableViewController.swift */; };
 		FAAFE5171EA6E2CC0092387A /* PopularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE50F1EA6E2CC0092387A /* PopularTableViewController.swift */; };
-		FAAFE5181EA6E2CC0092387A /* SearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE5101EA6E2CC0092387A /* SearchTableController.swift */; };
 		FAAFE5191EA6E2CC0092387A /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE5111EA6E2CC0092387A /* SettingsTableController.swift */; };
 		FAAFE51E1EA6E2D90092387A /* KinoKongDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE51A1EA6E2D90092387A /* KinoKongDataSource.swift */; };
 		FAAFE51F1EA6E2D90092387A /* KinoKongMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFE51B1EA6E2D90092387A /* KinoKongMediaItem.swift */; };
@@ -64,7 +63,6 @@
 		FAAFE50C1EA6E2CC0092387A /* KinoKongBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongBaseTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE50D1EA6E2CC0092387A /* KinoKongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongTableViewController.swift; sourceTree = "<group>"; };
 		FAAFE50F1EA6E2CC0092387A /* PopularTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularTableViewController.swift; sourceTree = "<group>"; };
-		FAAFE5101EA6E2CC0092387A /* SearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableController.swift; sourceTree = "<group>"; };
 		FAAFE5111EA6E2CC0092387A /* SettingsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableController.swift; sourceTree = "<group>"; };
 		FAAFE51A1EA6E2D90092387A /* KinoKongDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongDataSource.swift; sourceTree = "<group>"; };
 		FAAFE51B1EA6E2D90092387A /* KinoKongMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongMediaItem.swift; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				FAAFE50C1EA6E2CC0092387A /* KinoKongBaseTableViewController.swift */,
 				FAAFE50D1EA6E2CC0092387A /* KinoKongTableViewController.swift */,
 				FAAFE50F1EA6E2CC0092387A /* PopularTableViewController.swift */,
-				FAAFE5101EA6E2CC0092387A /* SearchTableController.swift */,
 				FAAFE5111EA6E2CC0092387A /* SettingsTableController.swift */,
 			);
 			path = ios;
@@ -265,7 +262,6 @@
 				FAAFE5051EA6E2C10092387A /* KinoKongController.swift in Sources */,
 				FAAFE5151EA6E2CC0092387A /* KinoKongTableViewController.swift in Sources */,
 				FAAFE51E1EA6E2D90092387A /* KinoKongDataSource.swift in Sources */,
-				FAAFE5181EA6E2CC0092387A /* SearchTableController.swift in Sources */,
 				FAAFE51F1EA6E2D90092387A /* KinoKongMediaItem.swift in Sources */,
 				FAAFE5201EA6E2D90092387A /* KinoKongService.swift in Sources */,
 				FAAFE5121EA6E2CC0092387A /* GenresGroupTableViewController.swift in Sources */,
