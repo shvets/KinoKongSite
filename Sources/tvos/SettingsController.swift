@@ -51,7 +51,7 @@ class SettingsController: KinoKongBaseCollectionViewController {
 
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-    let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+    let okAction = UIAlertAction(title: "OK", style: .default) {
       let history = (self.adapter as! KinoKongServiceAdapter).history
 
       history.clear()
@@ -72,7 +72,7 @@ class SettingsController: KinoKongBaseCollectionViewController {
 
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-    let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+    let okAction = UIAlertAction(title: "OK", style: .default) {
       let bookmarks = (self.adapter as! KinoKongServiceAdapter).bookmarks
 
       bookmarks.clear()
