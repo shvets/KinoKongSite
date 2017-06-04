@@ -6,6 +6,6 @@ open class KinoKongBaseCollectionViewController: BaseCollectionViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
 
-    localizer = Localizer(KinoKongServiceAdapter.BundleId)
+    localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
   }
 }

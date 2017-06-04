@@ -6,7 +6,7 @@ open class KinoKongBaseTableViewController: BaseTableViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
 
-    localizer = Localizer(KinoKongServiceAdapter.BundleId)
+    localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
   }
 
 }
