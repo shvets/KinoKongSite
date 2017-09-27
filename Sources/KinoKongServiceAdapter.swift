@@ -11,8 +11,8 @@ class KinoKongServiceAdapter: ServiceAdapter {
   override open class var StoryboardId: String { return "KinoKong" }
   override open class var BundleId: String { return "com.rubikon.KinoKongSite" }
 
-  lazy var bookmarks = Bookmarks(bookmarksFileName)
-  lazy var history = History(historyFileName)
+    lazy var bookmarks = Bookmarks(KinoKongServiceAdapter.bookmarksFileName)
+    lazy var history = History(KinoKongServiceAdapter.historyFileName)
 
   var episodes: [JSON]?
 
