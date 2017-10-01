@@ -6,18 +6,14 @@ import TVSetKit
 class KinoKongMediaItem: MediaItem {
   let service = KinoKongService.shared
 
-  var episodes = [JSON]()
-
+  var episodes = [Episode]()
+  var files = [String]()
+    
   override init(data: JSON) {
     super.init(data: data)
 
     self.episodes = []
-
-    let episodes = data["episodes"].arrayValue
-
-    for episode in episodes {
-      self.episodes.append(episode)
-    }
+    self.files = []
   }
 
   override func isContainer() -> Bool {
@@ -30,7 +26,7 @@ class KinoKongMediaItem: MediaItem {
     var urls: [String] = []
 
     if type == "episode" {
-      urls = [id!]
+      urls = files
     }
     else {
       urls = try service.getUrls(id!)
