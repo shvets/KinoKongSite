@@ -113,41 +113,46 @@ class KinoKongDataSource: DataSource {
     var newItems = [MediaItem]()
 
     if let seasons = items as? [Season] {
-      let path = selectedItem!.id!
-      let thumb = selectedItem!.thumb!
+      if let selectedItem = selectedItem {
+        let path = selectedItem.id!
+        let thumb = selectedItem.thumb!
 
-      for (index, season) in seasons.enumerated() {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
+        for (index, season) in seasons.enumerated() {
+          let encoder = JSONEncoder()
+          encoder.outputFormatting = .prettyPrinted
 
-        if let data = try? encoder.encode(season) {
-          let movie = KinoKongMediaItem(data: JSON(data))
+          if let data = try? encoder.encode(season) {
+            let movie = KinoKongMediaItem(data: JSON(data))
 
-          movie.name = season.name
-          movie.type = "season"
-          movie.id = path
+            movie.name = season.name
+            movie.type = "season"
+            movie.id = path
+            movie.thumb = thumb
+            movie.seasonNumber = String(index+1)
+
+            movie.episodes = season.playlist
+
+            newItems += [movie]
+          }
+        }
+      }
+
+    }
+    else if let episodes = items as? [Episode] {
+      if let selectedItem = selectedItem {
+        let thumb = selectedItem.thumb!
+
+        for episode in episodes {
+          let movie = KinoKongMediaItem(data: JSON(Data()))
+
+          movie.name = episode.name
+          movie.type = "episode"
+          movie.id = episode.files[0]
+          movie.files = episode.files
           movie.thumb = thumb
-          movie.seasonNumber = String(index+1)
-
-          movie.episodes = season.playlist
 
           newItems += [movie]
         }
-      }
-    }
-    else if let episodes = items as? [Episode] {
-      let thumb = selectedItem!.thumb!
-
-      for episode in episodes {
-        let movie = KinoKongMediaItem(data: JSON(Data()))
-
-        movie.name = episode.name
-        movie.type = "episode"
-        movie.id = episode.files[0]
-        movie.files = episode.files
-        movie.thumb = thumb
-
-        newItems += [movie]
       }
     }
     else if let items = items as? [Any] {

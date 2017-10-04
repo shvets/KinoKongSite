@@ -15,7 +15,11 @@ class KinoKongMediaItem: MediaItem {
     self.episodes = []
     self.files = []
   }
-
+  
+  required convenience init(from decoder: Decoder) throws {
+    fatalError("init(from:) has not been implemented")
+  }
+  
   override func isContainer() -> Bool {
     return type == "serie" || type == "season" || type == "rating"
   }
