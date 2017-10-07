@@ -13,7 +13,7 @@ class KinoKongDataSource: DataSource {
     let history = params["history"] as! History
     let selectedItem = params["selectedItem"] as? MediaItem
 
-    var episodes = [Episode]()
+    var episodes = [KinoKongAPI.Episode]()
 
     var request = params["requestType"] as! String
     //let pageSize = params["pageSize"] as? Int
@@ -106,13 +106,13 @@ class KinoKongDataSource: DataSource {
       result = []
     }
 
-    return convertToMediaItems(result, selectedItem: selectedItem)
+    return convertToMediaItems(result as Any, selectedItem: selectedItem)
   }
 
   func convertToMediaItems(_ items: Any, selectedItem: MediaItem?) -> [MediaItem] {
     var newItems = [MediaItem]()
 
-    if let seasons = items as? [Season] {
+    if let seasons = items as? [KinoKongAPI.Season] {
       if let selectedItem = selectedItem {
         let path = selectedItem.id!
         let thumb = selectedItem.thumb!
@@ -138,7 +138,7 @@ class KinoKongDataSource: DataSource {
       }
 
     }
-    else if let episodes = items as? [Episode] {
+    else if let episodes = items as? [KinoKongAPI.Episode] {
       if let selectedItem = selectedItem {
         let thumb = selectedItem.thumb!
 

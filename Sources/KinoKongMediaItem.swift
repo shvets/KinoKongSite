@@ -6,7 +6,7 @@ import TVSetKit
 class KinoKongMediaItem: MediaItem {
   let service = KinoKongService.shared
 
-  var episodes = [Episode]()
+  var episodes = [KinoKongAPI.Episode]()
   var files = [String]()
     
   override init(data: JSON) {
