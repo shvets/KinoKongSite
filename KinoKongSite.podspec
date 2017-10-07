@@ -22,7 +22,6 @@ Pod::Spec.new do |s|
     'com.rubikon.KinoKongSite' => ['Sources/**/*.{storyboard,strings}']
   }
 
-  s.dependency 'SwiftyJSON', '~> 3.1.4'
   s.dependency 'WebAPI', '~> 1.0.3'
   s.dependency 'Runglish', '~> 1.0.0'
   s.dependency 'AudioPlayer', '~> 1.0.7'

@@ -1,5 +1,4 @@
 import UIKit
-import SwiftyJSON
 import SwiftSoup
 import WebAPI
 import TVSetKit
@@ -13,8 +12,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
 
     lazy var bookmarks = Bookmarks(KinoKongServiceAdapter.bookmarksFileName)
     lazy var history = History(KinoKongServiceAdapter.historyFileName)
-
-  var episodes: [JSON]?
 
   public init(mobile: Bool=false) {
     super.init(dataSource: KinoKongDataSource(), mobile: mobile)

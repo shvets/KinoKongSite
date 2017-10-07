@@ -1,4 +1,3 @@
-import SwiftyJSON
 import SwiftSoup
 import WebAPI
 import TVSetKit
@@ -112,63 +111,81 @@ class KinoKongDataSource: DataSource {
   func convertToMediaItems(_ items: Any, selectedItem: MediaItem?) -> [MediaItem] {
     var newItems = [MediaItem]()
 
-    if let seasons = items as? [KinoKongAPI.Season] {
+    if let items = items as? [KinoKongAPI.Season] {
       if let selectedItem = selectedItem {
         let path = selectedItem.id!
         let thumb = selectedItem.thumb!
 
-        for (index, season) in seasons.enumerated() {
-          let encoder = JSONEncoder()
-          encoder.outputFormatting = .prettyPrinted
-
-          if let data = try? encoder.encode(season) {
-            let movie = KinoKongMediaItem(data: JSON(data))
-
-            movie.name = season.name
-            movie.type = "season"
-            movie.id = path
-            movie.thumb = thumb
-            movie.seasonNumber = String(index+1)
-
-            movie.episodes = season.playlist
-
-            newItems += [movie]
-          }
-        }
+        newItems = copySeasonsItems(items, path: path, thumb: thumb)
       }
-
     }
-    else if let episodes = items as? [KinoKongAPI.Episode] {
+    else if let items = items as? [KinoKongAPI.Episode] {
       if let selectedItem = selectedItem {
         let thumb = selectedItem.thumb!
 
-        for episode in episodes {
-          let movie = KinoKongMediaItem(data: JSON(Data()))
-
-          movie.name = episode.name
-          movie.type = "episode"
-          movie.id = episode.files[0]
-          movie.files = episode.files
-          movie.thumb = thumb
-
-          newItems += [movie]
-        }
+        newItems = copyEpisodesItems(items, thumb: thumb)
       }
     }
-    else if let items = items as? [Any] {
-      for item in items {
-        var jsonItem = item as? JSON
-
-        if jsonItem == nil {
-          jsonItem = JSON(item)
-        }
-
-        let movie = KinoKongMediaItem(data: jsonItem!)
-
-        newItems += [movie]
-      }
+    else if let items = items as? [[String: Any]] {
+      newItems = copyMediaItems(items)
     }
 
+    return newItems
+  }
+
+  func copySeasonsItems(_ items: [KinoKongAPI.Season], path: String, thumb: String) -> [KinoKongMediaItem] {
+    var newItems: [KinoKongMediaItem] = []
+
+    for (index, item) in items.enumerated() {
+      let newItem = KinoKongMediaItem(data: ["name": ""])
+
+      newItem.name = item.name
+      newItem.id = path
+      newItem.type = "season"
+      newItem.thumb = thumb
+      newItem.seasonNumber = String(index+1)
+      newItem.episodes = item.playlist
+
+      newItems.append(newItem)
+    }
+
+    return newItems
+  }
+
+  func copyEpisodesItems(_ items: [KinoKongAPI.Episode], thumb: String) -> [KinoKongMediaItem] {
+    var newItems: [KinoKongMediaItem] = []
+
+    for item in items {
+      let newItem = KinoKongMediaItem(data: ["name": ""])
+
+      newItem.name = item.name
+      newItem.id = item.files[0]
+      newItem.type = "episode"
+      newItem.files = item.files
+      newItem.thumb = thumb
+
+      newItems.append(newItem)
+    }
+
+    return newItems
+  }
+
+  func copyMediaItems(_ items:  [[String: Any]] ) -> [KinoKongMediaItem] {
+    var newItems: [KinoKongMediaItem] = []
+    
+    for item in items {
+      let newItem = KinoKongMediaItem(data: ["name": ""])
+
+      if let dict = item as? [String: String] {
+        newItem.name = dict["name"]
+        newItem.id = dict["id"]
+        newItem.type = dict["type"]
+        newItem.thumb = dict["thumb"]
+      }
+
+      newItems.append(newItem)
+    }
+    
     return newItems
   }
 }

@@ -1,5 +1,4 @@
 import UIKit
-import SwiftyJSON
 import WebAPI
 import TVSetKit
 
@@ -8,14 +7,11 @@ class KinoKongMediaItem: MediaItem {
 
   var episodes = [KinoKongAPI.Episode]()
   var files = [String]()
-    
-  override init(data: JSON) {
-    super.init(data: data)
 
-    self.episodes = []
-    self.files = []
+  public override init(data: [String: String]) {
+    super.init(data: data)
   }
-  
+
   required convenience init(from decoder: Decoder) throws {
     fatalError("init(from:) has not been implemented")
   }
