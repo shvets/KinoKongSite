@@ -108,8 +108,8 @@ class KinoKongDataSource: DataSource {
     return convertToMediaItems(result as Any, selectedItem: selectedItem)
   }
 
-  func convertToMediaItems(_ items: Any, selectedItem: MediaItem?) -> [MediaItem] {
-    var newItems = [MediaItem]()
+  func convertToMediaItems(_ items: Any, selectedItem: MediaItem?) -> [Item] {
+    var newItems = [Item]()
 
     if let items = items as? [KinoKongAPI.Season] {
       if let selectedItem = selectedItem {

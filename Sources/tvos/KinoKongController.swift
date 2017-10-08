@@ -28,18 +28,18 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
   }
 
   func loadData() {
-    items.append(MediaItem(name: "Bookmarks", imageName: "Star"))
-    items.append(MediaItem(name: "History", imageName: "Bookmark"))
-    items.append(MediaItem(name: "All Movies", imageName: "Retro TV"))
-    items.append(MediaItem(name: "New Movies", imageName: "Retro TV"))
-    items.append(MediaItem(name: "All Series", imageName: "Retro TV"))
-    items.append(MediaItem(name: "Animations", imageName: "Retro TV"))
-    items.append(MediaItem(name: "Anime", imageName: "Retro TV"))
-    items.append(MediaItem(name: "Shows", imageName: "Briefcase"))
-    items.append(MediaItem(name: "Genres", imageName: "Comedy"))
-    items.append(MediaItem(name: "Popular", imageName: "Briefcase"))
-    items.append(MediaItem(name: "Settings", imageName: "Engineering"))
-    items.append(MediaItem(name: "Search", imageName: "Search"))
+    items.append(MediaName(name: "Bookmarks", imageName: "Star"))
+    items.append(MediaName(name: "History", imageName: "Bookmark"))
+    items.append(MediaName(name: "All Movies", imageName: "Retro TV"))
+    items.append(MediaName(name: "New Movies", imageName: "Retro TV"))
+    items.append(MediaName(name: "All Series", imageName: "Retro TV"))
+    items.append(MediaName(name: "Animations", imageName: "Retro TV"))
+    items.append(MediaName(name: "Anime", imageName: "Retro TV"))
+    items.append(MediaName(name: "Shows", imageName: "Briefcase"))
+    items.append(MediaName(name: "Genres", imageName: "Comedy"))
+    items.append(MediaName(name: "Popular", imageName: "Briefcase"))
+    items.append(MediaName(name: "Settings", imageName: "Engineering"))
+    items.append(MediaName(name: "Search", imageName: "Search"))
   }
 
   override open func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
