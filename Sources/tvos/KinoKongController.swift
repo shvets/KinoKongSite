@@ -43,7 +43,7 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
   }
 
   override open func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
-    let mediaItem = getItem(for: view)
+    let mediaItem = getItem(for: view) as! MediaItem
 
     switch mediaItem.name! {
       case "Genres":
@@ -80,7 +80,7 @@ open class KinoKongController: KinoKongBaseCollectionViewController {
           if let destination = segue.destination.getActionController() as? MediaItemsController,
              let view = sender as? MediaNameCell {
 
-            let mediaItem = getItem(for: view)
+            let mediaItem = getItem(for: view) as! MediaItem
 
             let adapter = KinoKongServiceAdapter()
 
