@@ -42,7 +42,7 @@ class GenresGroupTableViewController: KinoKongBaseTableViewController {
              let selectedCell = sender as? MediaNameTableCell {
             adapter.params["requestType"] = "Genres Group"
 
-            let mediaItem = getItem(for: selectedCell) as! MediaItem
+            let mediaItem = getItem(for: selectedCell)
 
             switch mediaItem.name! {
               case "Movies":
