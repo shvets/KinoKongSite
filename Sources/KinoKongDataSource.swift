@@ -129,7 +129,33 @@ class KinoKongDataSource: DataSource {
     else if let items = items as? [[String: Any]] {
       newItems = copyMediaItems(items)
     }
+    else if let items = items as? [HistoryItem] {
+      for item in items {
+        let movie = KinoKongMediaItem(data: ["name": ""])
 
+        movie.name = item.item.name
+        movie.id = item.item.id
+        movie.description = item.item.description
+        movie.thumb = item.item.thumb
+        movie.type = item.item.type
+
+        newItems += [movie]
+      }
+    }
+    else if let items = items as? [BookmarkItem] {
+      for item in items {
+        let movie = KinoKongMediaItem(data: ["name": ""])
+
+        movie.name = item.item?.name
+        movie.id = item.item?.id
+        movie.description = item.item?.description
+        movie.thumb = item.item?.thumb
+        movie.type = item.item?.type
+
+        newItems += [movie]
+      }
+    }
+    
     return newItems
   }
 
