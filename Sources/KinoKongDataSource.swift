@@ -146,11 +146,11 @@ class KinoKongDataSource: DataSource {
       for item in items {
         let movie = KinoKongMediaItem(data: ["name": ""])
 
-        movie.name = item.item?.name
-        movie.id = item.item?.id
-        movie.description = item.item?.description
-        movie.thumb = item.item?.thumb
-        movie.type = item.item?.type
+        movie.name = item.item.name
+        movie.id = item.item.id
+        movie.description = item.item.description
+        movie.thumb = item.item.thumb
+        movie.type = item.item.type
 
         newItems += [movie]
       }
