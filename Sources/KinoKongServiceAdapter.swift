@@ -35,13 +35,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
     return cloned
   }
 
-  open func instantiateController(controllerId: String) -> UIViewController {
-    return UIViewController.instantiate(
-      controllerId: controllerId,
-      storyboardId: KinoKongServiceAdapter.StoryboardId,
-      bundleId: KinoKongServiceAdapter.BundleId)
-  }
-
   override open func load() throws -> [Any] {
     params["bookmarks"] = bookmarks
     params["history"] = history
