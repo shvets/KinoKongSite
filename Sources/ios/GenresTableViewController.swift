@@ -3,24 +3,70 @@ import SwiftSoup
 import WebAPI
 import TVSetKit
 
-class GenresTableViewController: KinoKongBaseTableViewController {
+class GenresTableViewController: UITableViewController {
   static let SegueIdentifier = "Genres"
+  let CellIdentifier = "GenreTableCell"
 
-  override public var CellIdentifier: String { return "GenreTableCell" }
+#if os(iOS)
+  public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+#endif
+
+  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+
+  var parentId: String?
+
+  private var items: Items!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.clearsSelectionOnViewWillAppear = false
 
-    tableView?.backgroundView = activityIndicatorView
-    adapter.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+    title = localizer.localize("Genres")
 
-    loadInitialData()
+    tableView?.backgroundView = activityIndicatorView
+
+    items = Items() {
+      let adapter = KinoKongServiceAdapter(mobile: true)
+
+      return try adapter.load()
+    }
+
+    items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+
+    items.loadInitialData(tableView)
   }
 
-  override open func navigate(from view: UITableViewCell) {
-    performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
+ // MARK: UITableViewDataSource
+
+  override open func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+
+  override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return items.count
+  }
+
+  override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath) as? MediaNameTableCell {
+      let item = items[indexPath.row]
+
+      cell.configureCell(item: item, localizedName: localizer.getLocalizedName(item.name))
+
+//      let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressed(_:)))
+//      tableView.addGestureRecognizer(longPressRecognizer)
+
+      return cell
+    }
+    else {
+      return UITableViewCell()
+    }
+  }
+
+  override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let view = tableView.cellForRow(at: indexPath) {
+      performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
+    }
   }
 
   // MARK: - Navigation
@@ -30,12 +76,13 @@ class GenresTableViewController: KinoKongBaseTableViewController {
       switch identifier {
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,
-             let view = sender as? MediaNameTableCell {
+             let view = sender as? MediaNameTableCell,
+             let indexPath = tableView.indexPath(for: view) {
 
             let adapter = KinoKongServiceAdapter(mobile: true)
 
             adapter.params["requestType"] = "Genres"
-            adapter.params["selectedItem"] = getItem(for: view)
+            adapter.params["selectedItem"] = items.getItem(for: indexPath)
 
             destination.adapter = adapter
           }

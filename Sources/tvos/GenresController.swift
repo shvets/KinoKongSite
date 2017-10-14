@@ -3,16 +3,45 @@ import SwiftSoup
 import WebAPI
 import TVSetKit
 
-class GenresController: KinoKongBaseCollectionViewController {
+class GenresController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   static let SegueIdentifier = "Genres"
 
-  override public var CellIdentifier: String { return "GenreCell" }
+  let CellIdentifier = "GenreCell"
+
+#if os(tvOS)
+  public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+#endif
+
+  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+
+  var parentId: String?
+
+  private var items: Items!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.clearsSelectionOnViewWillAppear = false
 
+    setupLayout()
+
+    items = Items() {
+      let adapter = KinoKongServiceAdapter()
+      adapter.params["requestType"] = "Genres Group"
+      
+      return try adapter.load()
+    }
+
+    #if os(tvOS)
+      collectionView?.backgroundView = activityIndicatorView
+      
+      items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+    #endif
+
+    items.loadInitialData(collectionView)
+  }
+
+  func setupLayout() {
     let layout = UICollectionViewFlowLayout()
 
     layout.itemSize = CGSize(width: 450, height: 150)
@@ -21,14 +50,46 @@ class GenresController: KinoKongBaseCollectionViewController {
     layout.minimumLineSpacing = 100.0
 
     collectionView?.collectionViewLayout = layout
-
-    collectionView?.backgroundView = activityIndicatorView
-    adapter.pageLoader.spinner = PlainSpinner(activityIndicatorView)
-
-    loadInitialData()
   }
 
-  override open func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
+ // MARK: UICollectionViewDataSource
+
+  override open func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+
+  override open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return items.count
+  }
+
+  override open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as? MediaNameCell {
+      if let item = items[indexPath.row] as? MediaName {
+        cell.configureCell(item: item, localizedName: localizer.getLocalizedName(item.name), target: self)
+      }
+
+      CellHelper.shared.addTapGestureRecognizer(view: cell, target: self, action: #selector(self.tapped(_:)))
+
+      return cell
+    }
+    else {
+      return UICollectionViewCell()
+    }
+  }
+
+  @objc open func tapped(_ gesture: UITapGestureRecognizer) {
+    if let location = gesture.view as? UICollectionViewCell {
+      navigate(from: location)
+    }
+  }
+
+  override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if let location = collectionView.cellForItem(at: indexPath) {
+      navigate(from: location)
+    }
+  }
+
+  func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
     performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
   }
 
@@ -37,12 +98,13 @@ class GenresController: KinoKongBaseCollectionViewController {
       switch identifier {
         case MediaItemsController.SegueIdentifier:
           if let destination = segue.destination.getActionController() as? MediaItemsController,
-             let view = sender as? MediaNameCell {
+             let view = sender as? MediaNameCell,
+             let indexPath = collectionView?.indexPath(for: view) {
 
             let adapter = KinoKongServiceAdapter()
 
             adapter.params["requestType"] = "Genres"
-            adapter.params["selectedItem"] = getItem(for: view)
+            adapter.params["selectedItem"] = items.getItem(for: indexPath)
 
             destination.adapter = adapter
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
