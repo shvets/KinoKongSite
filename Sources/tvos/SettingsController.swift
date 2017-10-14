@@ -16,7 +16,7 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
     setupLayout()
 
     items = Items() {
-      return self.loadSettingsMenu()
+      return self.getSettingsMenu()
     }
 
     items.loadInitialData(collectionView)
@@ -33,7 +33,7 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
     collectionView?.collectionViewLayout = layout
   }
 
-  func loadSettingsMenu() -> [Item] {
+  func getSettingsMenu() -> [Item] {
     return [
       Item(name: "Reset History"),
       Item(name: "Reset Bookmarks")
@@ -64,32 +64,33 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
       return UICollectionViewCell()
     }
   }
-
-//  @objc open func tapped(_ gesture: UITapGestureRecognizer) {
-//    if let location = gesture.view as? UICollectionViewCell {
-//      navigate(from: location)
-//    }
-//  }
-//
-//  override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    if let location = collectionView.cellForItem(at: indexPath) {
-//      navigate(from: location)
-//    }
-//  }
-
+  
   @objc open func tapped(_ gesture: UITapGestureRecognizer) {
-    if let selectedCell = gesture.view as? MediaNameCell,
-       let indexPath = collectionView?.indexPath(for: selectedCell) {
-      let settingsMode = items.getItem(for: indexPath).name
-      
+    if let location = gesture.view as? UICollectionViewCell {
+      navigate(from: location)
+    }
+  }
+
+  override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if let location = collectionView.cellForItem(at: indexPath) {
+      navigate(from: location)
+    }
+  }
+
+  func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
+    if let indexPath = collectionView?.indexPath(for: view) {
+      let mediaItem = items.getItem(for: indexPath)
+      let settingsMode = mediaItem.name
+
       if settingsMode == "Reset History" {
-        self.present(buildResetHistoryController(), animated: false, completion: nil)
+        present(buildResetHistoryController(), animated: false, completion: nil)
       }
       else if settingsMode == "Reset Bookmarks" {
-        self.present(buildResetQueueController(), animated: false, completion: nil)
+        present(buildResetQueueController(), animated: false, completion: nil)
       }
     }
   }
+
 
   func buildResetHistoryController() -> UIAlertController {
     let title = localizer.localize("History Will Be Reset")
