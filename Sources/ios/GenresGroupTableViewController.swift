@@ -51,8 +51,7 @@ class GenresGroupTableViewController: UITableViewController {
   }
 
   override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let view = tableView.cellForRow(at: indexPath),
-       let indexPath = tableView.indexPath(for: view) {
+    if let view = tableView.cellForRow(at: indexPath) {
       performSegue(withIdentifier: GenresController.SegueIdentifier, sender: view)
     }
   }

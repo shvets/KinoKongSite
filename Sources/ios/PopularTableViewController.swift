@@ -26,9 +26,11 @@ class PopularTableViewController: UITableViewController {
       return try adapter.load()
     }
 
-    tableView?.backgroundView = activityIndicatorView
-    items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
-
+    #if os(iOS)
+      tableView?.backgroundView = activityIndicatorView
+      items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+    #endif
+    
     items.loadInitialData(tableView)
   }
 
