@@ -19,8 +19,6 @@ class PopularTableViewController: UITableViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
-    tableView?.backgroundView = activityIndicatorView
-
     items = Items() {
       let adapter = KinoKongServiceAdapter(mobile: true)
       adapter.params["requestType"] = "Popular"
@@ -28,6 +26,7 @@ class PopularTableViewController: UITableViewController {
       return try adapter.load()
     }
 
+    tableView?.backgroundView = activityIndicatorView
     items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
     items.loadInitialData(tableView)

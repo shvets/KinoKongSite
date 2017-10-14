@@ -1,14 +1,10 @@
 import UIKit
-import SwiftSoup
-import WebAPI
 import TVSetKit
 
 open class KinoKongController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   let CellIdentifier = "KinoKongCell"
 
   let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
-
-  var document: Document?
 
   private var items: Items!
 
@@ -20,7 +16,7 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
     setupLayout()
 
     items = Items() {
-      return self.loadData()
+      return self.getMenuItems()
     }
 
     items.loadInitialData(collectionView)
@@ -37,7 +33,7 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
     collectionView?.collectionViewLayout = layout
   }
 
-  func loadData() -> [Item] {
+  func getMenuItems() -> [Item] {
     return [
       MediaName(name: "Bookmarks", imageName: "Star"),
       MediaName(name: "History", imageName: "Bookmark"),
@@ -150,6 +146,6 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
           break
       }
     }
-   }
+  }
 
 }

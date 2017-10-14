@@ -3,7 +3,6 @@ import TVSetKit
 
 class GenresController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   static let SegueIdentifier = "Genres"
-
   let CellIdentifier = "GenreCell"
 
 #if os(tvOS)
@@ -26,13 +25,13 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
     items = Items() {
       let adapter = KinoKongServiceAdapter()
       adapter.params["requestType"] = "Genres Group"
-      
+      adapter.params["parentId"] = self.parentId
+
       return try adapter.load()
     }
 
     #if os(tvOS)
       collectionView?.backgroundView = activityIndicatorView
-      
       items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
     #endif
 

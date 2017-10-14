@@ -16,13 +16,13 @@ open class KinoKongTableViewController: UITableViewController {
     title = localizer.localize("KinoKong")
 
     items = Items() {
-      return self.loadData()
+      return self.getMenuItems()
     }
 
     items.loadInitialData(tableView)
   }
 
-  func loadData() -> [Item] {
+  func getMenuItems() -> [Item] {
     return [
       MediaName(name: "Bookmarks", imageName: "Star"),
       MediaName(name: "History", imageName: "Bookmark"),

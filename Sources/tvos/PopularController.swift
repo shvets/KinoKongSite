@@ -3,7 +3,6 @@ import TVSetKit
 
 class PopularController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   static let SegueIdentifier = "Popular"
-
   let CellIdentifier = "PopularCell"
 
 #if os(tvOS)

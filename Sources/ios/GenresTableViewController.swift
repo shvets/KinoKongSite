@@ -22,14 +22,15 @@ class GenresTableViewController: UITableViewController {
 
     title = localizer.localize("Genres")
 
-    tableView?.backgroundView = activityIndicatorView
-
     items = Items() {
       let adapter = KinoKongServiceAdapter(mobile: true)
+      adapter.params["requestType"] = "Genres Group"
+      adapter.params["parentId"] = self.parentId
 
       return try adapter.load()
     }
 
+    tableView?.backgroundView = activityIndicatorView
     items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
 
     items.loadInitialData(tableView)
