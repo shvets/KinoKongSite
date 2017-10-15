@@ -66,18 +66,18 @@ class KinoKongServiceAdapter: ServiceAdapter {
     return CGRect(x: 40, y: 40, width: 180*2.7, height: 248*2.7)
   }
 
-  func getConfiguration() -> Configuration {
-    let conf = Configuration()
-
+  func getConfiguration() -> [String: Any] {
     if mobile {
-      conf.pageSize = 15
-      conf.rowSize = 1
+      return [
+        "pageSize": 15,
+        "rowSize": 1
+      ]
     }
     else {
-      conf.pageSize = 15
-      conf.rowSize = 5
+      return [
+        "pageSize": 15,
+        "rowSize": 5
+      ]
     }
-
-    return conf
   }
 }
