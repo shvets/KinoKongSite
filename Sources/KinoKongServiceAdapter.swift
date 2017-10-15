@@ -10,14 +10,21 @@ class KinoKongServiceAdapter: ServiceAdapter {
   override open class var StoryboardId: String { return "KinoKong" }
   override open class var BundleId: String { return "com.rubikon.KinoKongSite" }
 
-    lazy var bookmarks = Bookmarks(KinoKongServiceAdapter.bookmarksFileName)
-    lazy var history = History(KinoKongServiceAdapter.historyFileName)
+  lazy var bookmarks = Bookmarks(KinoKongServiceAdapter.bookmarksFileName)
+  lazy var history = History(KinoKongServiceAdapter.historyFileName)
 
+  var bookmarksManager: BookmarksManager!
+  var historyManager: HistoryManager!
+    
   public init(mobile: Bool=false) {
     super.init(dataSource: KinoKongDataSource(), mobile: mobile)
     
     bookmarks.load()
     history.load()
+    
+    bookmarksManager = BookmarksManager(bookmarks)
+    historyManager = HistoryManager(history)
+
 
     pageLoader.pageSize = 15
     pageLoader.rowSize = 5
@@ -59,20 +66,8 @@ class KinoKongServiceAdapter: ServiceAdapter {
     return CGRect(x: 40, y: 40, width: 180*2.7, height: 248*2.7)
   }
 
-  override func addBookmark(item: MediaItem) -> Bool {
-    return bookmarks.addBookmark(item: item)
-  }
-
-  override func removeBookmark(item: MediaItem) -> Bool {
-    return bookmarks.removeBookmark(id: item.id!)
-  }
-
-  override func addHistoryItem(_ item: MediaItem) {
-    history.add(item: item)
-  }
-
-func getConfiguration() -> Configuration {
-    var conf = Configuration()
+  func getConfiguration() -> Configuration {
+    let conf = Configuration()
 
     if mobile {
       conf.pageSize = 15
