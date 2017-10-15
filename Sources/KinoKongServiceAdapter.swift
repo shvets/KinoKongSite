@@ -59,12 +59,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
     return CGRect(x: 40, y: 40, width: 180*2.7, height: 248*2.7)
   }
 
-  override func getUrl(_ params: [String: Any]) throws -> String {
-    let bitrate = params["bitrate"] as! [String: String]
-
-    return bitrate["url"]!
-  }
-
   override func addBookmark(item: MediaItem) -> Bool {
     return bookmarks.addBookmark(item: item)
   }

@@ -20,8 +20,8 @@ class KinoKongMediaItem: MediaItem {
     return type == "serie" || type == "season" || type == "rating"
   }
 
-  override func getBitrates() throws -> [[String: Any]] {
-    var bitrates: [[String: Any]] = []
+  override func getBitrates() throws -> [[String: String]] {
+    var bitrates: [[String: String]] = []
 
     var urls: [String] = []
 
@@ -37,7 +37,7 @@ class KinoKongMediaItem: MediaItem {
     for (index, url) in urls.enumerated() {
       let metadata = service.getMetadata(url)
 
-      var bitrate: [String: Any] = [:]
+      var bitrate: [String: String] = [:]
       bitrate["id"] = metadata["width"]
       bitrate["url"] = url
 
