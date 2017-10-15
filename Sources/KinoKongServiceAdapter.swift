@@ -71,4 +71,18 @@ class KinoKongServiceAdapter: ServiceAdapter {
     history.add(item: item)
   }
 
+func getConfiguration() -> Configuration {
+    var conf = Configuration()
+
+    if mobile {
+      conf.pageSize = 15
+      conf.rowSize = 1
+    }
+    else {
+      conf.pageSize = 15
+      conf.rowSize = 5
+    }
+
+    return conf
+  }
 }

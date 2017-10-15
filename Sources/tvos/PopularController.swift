@@ -101,6 +101,7 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
             adapter.params["selectedItem"] = items.getItem(for: indexPath)
 
             destination.adapter = adapter
+            destination.configuration = adapter.getConfiguration()
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
           }
 
