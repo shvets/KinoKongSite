@@ -25,7 +25,6 @@ class KinoKongServiceAdapter: ServiceAdapter {
     bookmarksManager = BookmarksManager(bookmarks)
     historyManager = HistoryManager(history)
 
-
     pageLoader.pageSize = 15
     pageLoader.rowSize = 5
 
@@ -67,17 +66,20 @@ class KinoKongServiceAdapter: ServiceAdapter {
   }
 
   func getConfiguration() -> [String: Any] {
+    var conf = [String: Any]()
+
+    conf["pageSize"] = 15
+
     if mobile {
-      return [
-        "pageSize": 15,
-        "rowSize": 1
-      ]
+      conf["rowSize"] = 1
     }
     else {
-      return [
-        "pageSize": 15,
-        "rowSize": 5
-      ]
+      conf["rowSize"] = 5
     }
+
+    conf["bookmarksManager"] = bookmarksManager
+    conf["historyManager"] = historyManager
+
+    return conf
   }
 }
