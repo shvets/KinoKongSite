@@ -97,7 +97,7 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
 
             let adapter = KinoKongServiceAdapter()
 
-            adapter.params["requestType"] = "Rating"
+            destination.params["requestType"] = "Rating"
             adapter.params["selectedItem"] = items.getItem(for: indexPath)
 
             destination.adapter = adapter

@@ -76,7 +76,7 @@ class PopularTableViewController: UITableViewController {
 
             let adapter = KinoKongServiceAdapter(mobile: true)
 
-            adapter.params["requestType"] = "Rating"
+            destination.params["requestType"] = "Rating"
             adapter.params["selectedItem"] = items.getItem(for: indexPath)
 
             destination.adapter = adapter
