@@ -13,7 +13,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
 
   var parentId: String?
 
-  private var items: Items!
+  private var items = Items()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,7 +22,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
 
     setupLayout()
 
-    items = Items() {
+    items.pageLoader.load = {
       let adapter = KinoKongServiceAdapter()
       adapter.params["requestType"] = "Genres Group"
       adapter.params["parentId"] = self.parentId

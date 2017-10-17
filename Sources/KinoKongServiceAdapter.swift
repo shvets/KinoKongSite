@@ -74,6 +74,8 @@ class KinoKongServiceAdapter: ServiceAdapter {
       conf["rowSize"] = 5
     }
 
+    conf["mobile"] = mobile
+
     conf["bookmarksManager"] = bookmarksManager
     conf["historyManager"] = historyManager
 

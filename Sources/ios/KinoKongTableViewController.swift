@@ -6,7 +6,7 @@ open class KinoKongTableViewController: UITableViewController {
 
   let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
 
-  private var items: Items!
+  private var items = Items()
 
   override open func viewDidLoad() {
     super.viewDidLoad()
@@ -15,7 +15,7 @@ open class KinoKongTableViewController: UITableViewController {
 
     title = localizer.localize("KinoKong")
 
-    items = Items() {
+    items.pageLoader.load = {
       return self.getMenuItems()
     }
 

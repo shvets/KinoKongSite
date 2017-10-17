@@ -7,14 +7,14 @@ class GenresGroupTableViewController: UITableViewController {
 
   let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
 
-  private var items: Items!
+  private var items = Items()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.clearsSelectionOnViewWillAppear = false
 
-    items = Items() {
+    items.pageLoader.load = {
       return self.loadGenresGroupMenu()
     }
 

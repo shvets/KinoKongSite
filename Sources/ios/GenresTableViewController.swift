@@ -13,7 +13,7 @@ class GenresTableViewController: UITableViewController {
 
   var parentId: String?
 
-  private var items: Items!
+  private var items = Items()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,7 +22,7 @@ class GenresTableViewController: UITableViewController {
 
     title = localizer.localize("Genres")
 
-    items = Items() {
+    items.pageLoader.load = {
       let adapter = KinoKongServiceAdapter(mobile: true)
       adapter.params["requestType"] = "Genres Group"
       adapter.params["parentId"] = self.parentId

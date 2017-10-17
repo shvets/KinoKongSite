@@ -11,7 +11,7 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
 
   let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
 
-  private var items: Items!
+  private var items = Items()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,7 +20,7 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
 
     setupLayout()
 
-    items = Items() {
+    items.pageLoader.load = {
       let adapter = KinoKongServiceAdapter()
       adapter.params["requestType"] = "Popular"
 

@@ -6,7 +6,7 @@ class SettingsTableController: UITableViewController {
 
   let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
 
-  private var items: Items!
+  private var items = Items()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -15,7 +15,7 @@ class SettingsTableController: UITableViewController {
 
     title = localizer.localize("Settings")
 
-    items = Items() {
+    items.pageLoader.load = {
       return self.getSettingsMenu()
     }
 

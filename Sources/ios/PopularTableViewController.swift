@@ -12,14 +12,14 @@ class PopularTableViewController: UITableViewController {
 
   let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
 
-  private var items: Items!
+  private var items = Items()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.clearsSelectionOnViewWillAppear = false
 
-    items = Items() {
+    items.pageLoader.load = {
       let adapter = KinoKongServiceAdapter(mobile: true)
       adapter.params["requestType"] = "Popular"
 
