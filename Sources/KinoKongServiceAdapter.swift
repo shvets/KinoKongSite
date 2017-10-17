@@ -18,10 +18,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     
   public init(mobile: Bool=false) {
     super.init(dataSource: KinoKongDataSource(), mobile: mobile)
-    
-    bookmarks.load()
-    history.load()
-    
+
     bookmarksManager = BookmarksManager(bookmarks)
     historyManager = HistoryManager(history)
 
