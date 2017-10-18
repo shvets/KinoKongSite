@@ -77,6 +77,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     conf["historyManager"] = historyManager
     conf["dataSource"] = dataSource
     conf["storyboardId"] = KinoKongServiceAdapter.StoryboardId
+    conf["bundleId"] = KinoKongServiceAdapter.BundleId
     conf["detailsImageFrame"] = getDetailsImageFrame()
     conf["buildLayout"] = buildLayout()
 
