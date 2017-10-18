@@ -42,7 +42,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     return try super.load()
   }
 
-  override func buildLayout() -> UICollectionViewFlowLayout? {
+  func buildLayout() -> UICollectionViewFlowLayout? {
     let layout = UICollectionViewFlowLayout()
 
     layout.itemSize = CGSize(width: 180*1.6, height: 248*1.6) // 180 x 248
@@ -78,6 +78,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     conf["dataSource"] = dataSource
     conf["storyboardId"] = KinoKongServiceAdapter.StoryboardId
     conf["detailsImageFrame"] = getDetailsImageFrame()
+    conf["buildLayout"] = buildLayout()
 
     return conf
   }
