@@ -55,7 +55,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     return layout
   }
 
-  override func getDetailsImageFrame() -> CGRect? {
+  func getDetailsImageFrame() -> CGRect? {
     return CGRect(x: 40, y: 40, width: 180*2.7, height: 248*2.7)
   }
 
@@ -77,6 +77,7 @@ class KinoKongServiceAdapter: ServiceAdapter {
     conf["historyManager"] = historyManager
     conf["dataSource"] = dataSource
     conf["storyboardId"] = KinoKongServiceAdapter.StoryboardId
+    conf["detailsImageFrame"] = getDetailsImageFrame()
 
     return conf
   }
