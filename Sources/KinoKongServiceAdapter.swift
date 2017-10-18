@@ -13,14 +13,11 @@ class KinoKongServiceAdapter: ServiceAdapter {
   lazy var bookmarks = Bookmarks(KinoKongServiceAdapter.bookmarksFileName)
   lazy var history = History(KinoKongServiceAdapter.historyFileName)
 
-  var bookmarksManager: BookmarksManager!
-  var historyManager: HistoryManager!
+  lazy var bookmarksManager = BookmarksManager(bookmarks)
+  lazy var historyManager = HistoryManager(history)
     
   public init(mobile: Bool=false) {
     super.init(dataSource: KinoKongDataSource(), mobile: mobile)
-
-    bookmarksManager = BookmarksManager(bookmarks)
-    historyManager = HistoryManager(history)
 
     pageLoader.pageSize = 15
     pageLoader.rowSize = 5
@@ -78,6 +75,8 @@ class KinoKongServiceAdapter: ServiceAdapter {
 
     conf["bookmarksManager"] = bookmarksManager
     conf["historyManager"] = historyManager
+    conf["dataSource"] = dataSource
+    conf["storyboardId"] = KinoKongServiceAdapter.StoryboardId
 
     return conf
   }

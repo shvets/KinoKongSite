@@ -101,7 +101,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
             let adapter = KinoKongServiceAdapter()
 
             destination.params["requestType"] = "Genres"
-            adapter.params["selectedItem"] = items.getItem(for: indexPath)
+            destination.params["selectedItem"] = items.getItem(for: indexPath)
 
             destination.adapter = adapter
             destination.configuration = adapter.getConfiguration()
