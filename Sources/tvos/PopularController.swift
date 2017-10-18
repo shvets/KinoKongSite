@@ -100,7 +100,6 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
             destination.params["requestType"] = "Rating"
             destination.params["selectedItem"] = items.getItem(for: indexPath)
 
-            destination.adapter = adapter
             destination.configuration = adapter.getConfiguration()
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
           }
