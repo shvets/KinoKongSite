@@ -10,7 +10,9 @@ class PopularTableViewController: UITableViewController {
   public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 #endif
 
-  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+  let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
+
+  let service = KinoKongService(true)
 
   private var items = Items()
 
@@ -20,10 +22,11 @@ class PopularTableViewController: UITableViewController {
     self.clearsSelectionOnViewWillAppear = false
 
     items.pageLoader.load = {
-      let adapter = KinoKongServiceAdapter(mobile: true)
-      adapter.params["requestType"] = "Popular"
+      var params = Parameters()
+      params["requestType"] = "Popular"
+      //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
 
-      return try adapter.load()
+      return try self.service.dataSource.load(params: params)
     }
 
     #if os(iOS)
@@ -74,12 +77,10 @@ class PopularTableViewController: UITableViewController {
              let view = sender as? MediaNameTableCell,
               let indexPath = tableView?.indexPath(for: view) {
 
-            let adapter = KinoKongServiceAdapter(mobile: true)
-
             destination.params["requestType"] = "Rating"
             destination.params["selectedItem"] = items.getItem(for: indexPath)
 
-            destination.configuration = adapter.getConfiguration()
+            destination.configuration = service.getConfiguration()
           }
 
         default: break

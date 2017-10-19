@@ -8,14 +8,11 @@ class KinoKongDataSource: DataSource {
   override open func load(params: Parameters) throws -> [Any] {
     var result : Any?
 
-//    let bookmarks = params["bookmarks"] as! Bookmarks
-//    let history = params["history"] as! History
     let selectedItem = params["selectedItem"] as? MediaItem
 
     var episodes = [KinoKongAPI.Episode]()
 
     var request = params["requestType"] as! String
-    //let pageSize = params["pageSize"] as? Int
     let currentPage = params["currentPage"] as! Int
 
     if selectedItem?.type == "rating" {

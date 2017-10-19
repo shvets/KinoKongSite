@@ -5,7 +5,9 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
   static let SegueIdentifier = "Genres Group"
   let CellIdentifier = "GenreGroupCell"
 
-  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+  let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
+
+  let service = KinoKongService()
 
   private var items = Items()
 

@@ -4,7 +4,9 @@ import TVSetKit
 open class KinoKongController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   let CellIdentifier = "KinoKongCell"
 
-  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+  let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
+
+  let service = KinoKongService()
 
   private var items = Items()
 
@@ -122,13 +124,11 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
 
             let mediaItem = items.getItem(for: indexPath)
 
-            let adapter = KinoKongServiceAdapter()
-
             destination.params["requestType"] = mediaItem.name
             destination.params["parentName"] = localizer.localize(mediaItem.name!)
-            destination.configuration = adapter.getConfiguration()
+            destination.configuration = service.getConfiguration()
 
-            destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
+            destination.collectionView?.collectionViewLayout = service.buildLayout()!
           }
 
         case SearchController.SegueIdentifier:

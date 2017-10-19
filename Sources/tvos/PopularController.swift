@@ -9,7 +9,9 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
   public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
 #endif
 
-  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+  let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
+
+  let service = KinoKongService()
 
   private var items = Items()
 
@@ -21,10 +23,11 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
     setupLayout()
 
     items.pageLoader.load = {
-      let adapter = KinoKongServiceAdapter()
-      adapter.params["requestType"] = "Popular"
+      var params = Parameters()
+      params["requestType"] = "Popular"
+      //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
 
-      return try adapter.load()
+      return try self.service.dataSource.load(params: params)
     }
 
     #if os(tvOS)
@@ -95,13 +98,11 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
              let view = sender as? MediaNameCell,
              let indexPath = collectionView?.indexPath(for: view) {
 
-            let adapter = KinoKongServiceAdapter()
-
             destination.params["requestType"] = "Rating"
             destination.params["selectedItem"] = items.getItem(for: indexPath)
-            destination.configuration = adapter.getConfiguration()
+            destination.configuration = service.getConfiguration()
 
-            destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
+            destination.collectionView?.collectionViewLayout = service.buildLayout()!
           }
 
         default: break

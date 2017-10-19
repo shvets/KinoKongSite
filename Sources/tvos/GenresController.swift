@@ -9,7 +9,9 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
   public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
 #endif
 
-  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+  let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
+
+  let service = KinoKongService()
 
   var parentId: String?
 
@@ -23,11 +25,12 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
     setupLayout()
 
     items.pageLoader.load = {
-      let adapter = KinoKongServiceAdapter()
-      adapter.params["requestType"] = "Genres Group"
-      adapter.params["parentId"] = self.parentId
-
-      return try adapter.load()
+      var params = Parameters()
+      params["requestType"] = "Genres Group"
+      params["parentId"] = self.parentId
+      //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
+      
+      return try self.service.dataSource.load(params: params)
     }
 
     #if os(tvOS)
@@ -98,13 +101,11 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
              let view = sender as? MediaNameCell,
              let indexPath = collectionView?.indexPath(for: view) {
 
-            let adapter = KinoKongServiceAdapter()
-
             destination.params["requestType"] = "Genres"
             destination.params["selectedItem"] = items.getItem(for: indexPath)
-            destination.configuration = adapter.getConfiguration()
+            destination.configuration = service.getConfiguration()
 
-            destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
+            destination.collectionView?.collectionViewLayout = service.buildLayout()!
           }
 
         default: break

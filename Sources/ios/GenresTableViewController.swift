@@ -9,7 +9,9 @@ class GenresTableViewController: UITableViewController {
   public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 #endif
 
-  let localizer = Localizer(KinoKongServiceAdapter.BundleId, bundleClass: KinoKongSite.self)
+  let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
+
+  let service = KinoKongService(true)
 
   var parentId: String?
 
@@ -23,11 +25,12 @@ class GenresTableViewController: UITableViewController {
     title = localizer.localize("Genres")
 
     items.pageLoader.load = {
-      let adapter = KinoKongServiceAdapter(mobile: true)
-      adapter.params["requestType"] = "Genres Group"
-      adapter.params["parentId"] = self.parentId
+      var params = Parameters()
+      params["requestType"] = "Genres Group"
+      params["parentId"] = self.parentId
+      //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
 
-      return try adapter.load()
+      return try self.service.dataSource.load(params: params)
     }
 
     #if os(iOS)
@@ -80,12 +83,10 @@ class GenresTableViewController: UITableViewController {
              let view = sender as? MediaNameTableCell,
              let indexPath = tableView.indexPath(for: view) {
 
-            let adapter = KinoKongServiceAdapter(mobile: true)
-
             destination.params["requestType"] = "Genres"
             destination.params["selectedItem"] = items.getItem(for: indexPath)
 
-            destination.configuration = adapter.getConfiguration()
+            destination.configuration = service.getConfiguration()
           }
 
         default: break
