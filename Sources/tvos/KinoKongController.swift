@@ -126,8 +126,8 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
 
             destination.params["requestType"] = mediaItem.name
             destination.params["parentName"] = localizer.localize(mediaItem.name!)
-
             destination.configuration = adapter.getConfiguration()
+
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
           }
 

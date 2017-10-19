@@ -102,8 +102,8 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
 
             destination.params["requestType"] = "Genres"
             destination.params["selectedItem"] = items.getItem(for: indexPath)
-
             destination.configuration = adapter.getConfiguration()
+
             destination.collectionView?.collectionViewLayout = adapter.buildLayout()!
           }
 
