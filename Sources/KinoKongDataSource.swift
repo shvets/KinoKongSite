@@ -6,14 +6,14 @@ class KinoKongDataSource: DataSource {
   let service = KinoKongService.shared
 
   override open func load(params: Parameters) throws -> [Any] {
-    var result : Any?
+    var items = [Any]()
 
     let selectedItem = params["selectedItem"] as? MediaItem
 
     var episodes = [KinoKongAPI.Episode]()
 
     var request = params["requestType"] as! String
-    let currentPage = params["currentPage"] as! Int
+    let currentPage = params["currentPage"] as? Int ?? 1
 
     if selectedItem?.type == "rating" {
       request = "Seasons"
@@ -24,195 +24,233 @@ class KinoKongDataSource: DataSource {
     else if selectedItem?.type == "season" {
       request = "Episodes"
 
-      episodes = (selectedItem as! KinoKongMediaItem).episodes
+      if let selectedItem = selectedItem as? KinoKongMediaItem {
+        episodes = selectedItem.episodes
+      }
     }
 
     switch request {
     case "Bookmarks":
-      if let bookmarksManager = params["bookmarksManager"]  as? BookmarksManager,
+      if let bookmarksManager = params["bookmarksManager"] as? BookmarksManager,
          let bookmarks = bookmarksManager.bookmarks {
-        result = bookmarks.getBookmarks(pageSize: 60, page: currentPage)
+        let data = bookmarks.getBookmarks(pageSize: 60, page: currentPage)
+
+        items = adjustItems(data)
       }
 
     case "History":
-      if let historyManager = params["historyManager"]  as? HistoryManager,
+      if let historyManager = params["historyManager"] as? HistoryManager,
          let history = historyManager.history {
-        result = history.getHistoryItems(pageSize: 60, page: currentPage)
+        let data = history.getHistoryItems(pageSize: 60, page: currentPage)
+
+        items = adjustItems(data)
       }
 
     case "All Movies":
-      result = try service.getAllMovies(page: currentPage)["movies"] as! [Any]
+      if let data = try service.getAllMovies(page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "New Movies":
-      result = try service.getNewMovies(page: currentPage)["movies"] as! [Any]
+      if let data = try service.getNewMovies(page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "All Series":
-      result = try service.getAllSeries(page: currentPage)["movies"] as! [Any]
+      if let data = try service.getAllSeries(page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "Animations":
-      result = try service.getAnimations(page: currentPage)["movies"] as! [Any]
+      if let data = try service.getAnimations(page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "Anime":
-      result = try service.getAnime(page: currentPage)["movies"] as! [Any]
+      if let data = try service.getAnime(page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "Shows":
-      result = try service.getTvShows(page: currentPage)["movies"] as! [Any]
+      if let data = try service.getTvShows(page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "Genres Group":
       if let genresType = params["parentId"] as? String {
         let groupedGenres = try service.getGroupedGenres()
 
-        result = groupedGenres[genresType]!
+        if let data = groupedGenres[genresType] {
+          items = adjustItems(data)
+        }
       }
 
     case "Genres":
-      let path = selectedItem!.id
-
-      result = try service.getMovies(path!, page: currentPage)["movies"] as! [Any]
+      if let selectedItem = selectedItem,
+         let path = selectedItem.id,
+         let data = try service.getMovies(path, page: currentPage)["movies"] as? [Any] {
+        items = adjustItems(data)
+      }
 
     case "Popular":
       let groupedGenres = try service.getGroupedGenres()
 
-      result = groupedGenres["top"]!
+      if let data = groupedGenres["top"] {
+        items = adjustItems(data)
+      }
 
     case "Rating":
-      let path = selectedItem!.id
-
-      if path == "/podborka.html" {
-        result = try service.getTags()
-      }
-      else {
-        result = try service.getMoviesByCriteriaPaginated(path!, page: currentPage)["movies"] as! [Any]
+      if let selectedItem = selectedItem,
+         let path = selectedItem.id {
+        if path == "/podborka.html" {
+          items = try service.getTags()
+        }
+        else {
+          if let data = try service.getMoviesByCriteriaPaginated(path, page: currentPage)["movies"] as? [Any] {
+            items = adjustItems(data)
+          }
+        }
       }
 
     case "Seasons":
-      let path = selectedItem!.id!
+      if let selectedItem = selectedItem,
+         let path = selectedItem.id {
+        let playlistUrl = try service.getSeriePlaylistUrl(path)
 
-      let playlistUrl = try service.getSeriePlaylistUrl(path)
+        items = try service.getSeasons(playlistUrl)
 
-      result = try service.getSeasons(playlistUrl)
+        items = adjustItems(items, selectedItem: selectedItem)
+      }
 
     case "Episodes":
-      result = episodes
+      if let selectedItem = selectedItem {
+        items = adjustItems(episodes, selectedItem: selectedItem)
+      }
 
     case "Search":
       if let query = params["query"] as? String {
         if !query.isEmpty {
-          result = try service.search(query, page: currentPage)["movies"] as! [Any]
+          if let data = try service.search(query, page: currentPage)["movies"] as? [Any] {
+            items = adjustItems(data)
+          }
         }
       }
 
     default:
-      result = []
+      items = []
     }
 
-    return convertToMediaItems(result as Any, selectedItem: selectedItem)
+    return items
   }
 
-  func convertToMediaItems(_ items: Any, selectedItem: MediaItem?) -> [Item] {
+  func adjustItems(_ items: [Any], selectedItem: MediaItem?=nil) -> [Item] {
     var newItems = [Item]()
 
-    if let items = items as? [KinoKongAPI.Season] {
-      if let selectedItem = selectedItem {
-        let path = selectedItem.id!
-        let thumb = selectedItem.thumb!
-
-        newItems = copySeasonsItems(items, path: path, thumb: thumb)
-      }
-    }
-    else if let items = items as? [KinoKongAPI.Episode] {
-      if let selectedItem = selectedItem {
-        let thumb = selectedItem.thumb!
-
-        newItems = copyEpisodesItems(items, thumb: thumb)
-      }
-    }
-    else if let items = items as? [[String: Any]] {
-      newItems = copyMediaItems(items)
-    }
-    else if let items = items as? [HistoryItem] {
-      for item in items {
-        let movie = KinoKongMediaItem(data: ["name": ""])
-
-        movie.name = item.item.name
-        movie.id = item.item.id
-        movie.description = item.item.description
-        movie.thumb = item.item.thumb
-        movie.type = item.item.type
-
-        newItems += [movie]
+    if let items = items as? [HistoryItem] {
+      newItems = transform(items) { item in
+        createHistoryItem(item as! HistoryItem)
       }
     }
     else if let items = items as? [BookmarkItem] {
-      for item in items {
-        let movie = KinoKongMediaItem(data: ["name": ""])
-
-        movie.name = item.item.name
-        movie.id = item.item.id
-        movie.description = item.item.description
-        movie.thumb = item.item.thumb
-        movie.type = item.item.type
-
-        newItems += [movie]
+      newItems = transform(items) { item in
+        createBookmarkItem(item as! BookmarkItem)
       }
     }
-    
+    else if let items = items as? [KinoKongAPI.Season] {
+      newItems = transformWithIndex(items) { (index, item) in
+        let seasonNumber = String(index+1)
+        
+        return createSeasonItem(item as! KinoKongAPI.Season, selectedItem: selectedItem!, seasonNumber: seasonNumber)
+      }
+    }
+    else if let items = items as? [KinoKongAPI.Episode] {
+      newItems = transform(items) { item in
+        createEpisodeItem(item as! KinoKongAPI.Episode, selectedItem: selectedItem!)
+      }
+    }
+    else if let items = items as? [[String: Any]] {
+      newItems = transform(items) { item in
+        createMediaItem(item as! [String: Any])
+      }
+    }
+    else if let items = items as? [Item] {
+      newItems = items
+    }
+
     return newItems
   }
 
-  func copySeasonsItems(_ items: [KinoKongAPI.Season], path: String, thumb: String) -> [KinoKongMediaItem] {
-    var newItems: [KinoKongMediaItem] = []
+  func createHistoryItem(_ item: HistoryItem) -> Item {
+    let newItem = MediaItem(data: ["name": ""])
 
-    for (index, item) in items.enumerated() {
-      let newItem = KinoKongMediaItem(data: ["name": ""])
+    newItem.name = item.item.name
+    newItem.id = item.item.id
+    newItem.description = item.item.description
+    newItem.thumb = item.item.thumb
+    newItem.type = item.item.type
 
-      newItem.name = item.name
+    return newItem
+  }
+
+  func createBookmarkItem(_ item: BookmarkItem) -> Item {
+    let newItem = MediaItem(data: ["name": ""])
+
+    newItem.name = item.item.name
+    newItem.id = item.item.id
+    newItem.description = item.item.description
+    newItem.thumb = item.item.thumb
+    newItem.type = item.item.type
+
+    return newItem
+  }
+
+    func createSeasonItem(_ item: KinoKongAPI.Season, selectedItem: MediaItem, seasonNumber: String) -> Item {
+    let newItem = KinoKongMediaItem(data: ["name": ""])
+
+    newItem.name = item.name
+    
+    if let path = selectedItem.id {
       newItem.id = path
-      newItem.type = "season"
-      newItem.thumb = thumb
-      newItem.seasonNumber = String(index+1)
-      newItem.episodes = item.playlist
-
-      newItems.append(newItem)
-    }
-
-    return newItems
-  }
-
-  func copyEpisodesItems(_ items: [KinoKongAPI.Episode], thumb: String) -> [KinoKongMediaItem] {
-    var newItems: [KinoKongMediaItem] = []
-
-    for item in items {
-      let newItem = KinoKongMediaItem(data: ["name": ""])
-
-      newItem.name = item.name
-      newItem.id = item.files[0]
-      newItem.type = "episode"
-      newItem.files = item.files
-      newItem.thumb = thumb
-
-      newItems.append(newItem)
-    }
-
-    return newItems
-  }
-
-  func copyMediaItems(_ items:  [[String: Any]] ) -> [KinoKongMediaItem] {
-    var newItems: [KinoKongMediaItem] = []
-    
-    for item in items {
-      let newItem = KinoKongMediaItem(data: ["name": ""])
-
-      if let dict = item as? [String: String] {
-        newItem.name = dict["name"]
-        newItem.id = dict["id"]
-        newItem.type = dict["type"]
-        newItem.thumb = dict["thumb"]
-      }
-
-      newItems.append(newItem)
     }
     
-    return newItems
+    newItem.type = "season"
+    
+    if let thumb = selectedItem.thumb {
+      newItem.thumb = thumb
+    }
+    
+    newItem.seasonNumber = seasonNumber
+    newItem.episodes = item.playlist
+
+    return newItem
   }
+
+    func createEpisodeItem(_ item: KinoKongAPI.Episode, selectedItem: MediaItem) -> Item {
+    let newItem = KinoKongMediaItem(data: ["name": ""])
+
+    newItem.name = item.name
+    newItem.id = item.files[0]
+    newItem.type = "episode"
+    newItem.files = item.files
+        
+    if let thumb = selectedItem.thumb {
+      newItem.thumb = thumb
+    }
+
+    return newItem
+  }
+
+  func createMediaItem(_ item: [String: Any]) -> Item {
+    let newItem = KinoKongMediaItem(data: ["name": ""])
+
+    if let dict = item as? [String: String] {
+      newItem.name = dict["name"]
+      newItem.id = dict["id"]
+      newItem.type = dict["type"]
+      newItem.thumb = dict["thumb"]
+    }
+
+    return newItem
+  }
+
 }
