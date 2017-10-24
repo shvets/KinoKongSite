@@ -70,21 +70,10 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
   }
 
   @objc open func tapped(_ gesture: UITapGestureRecognizer) {
-    if let location = gesture.view as? UICollectionViewCell {
-      navigate(from: location)
+    if let view = gesture.view as? UICollectionViewCell {
+      performSegue(withIdentifier: GenresController.SegueIdentifier, sender: view)
     }
   }
-
-  override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if let location = collectionView.cellForItem(at: indexPath) {
-      navigate(from: location)
-    }
-  }
-
-  func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
-    performSegue(withIdentifier: GenresController.SegueIdentifier, sender: view)
-  }
-
 
   // MARK: - Navigation
 

@@ -22,18 +22,17 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
 
     setupLayout()
 
+#if os(tvOS)
+    collectionView?.backgroundView = activityIndicatorView
+    items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+#endif
+
     items.pageLoader.load = {
       var params = Parameters()
       params["requestType"] = "Popular"
-      //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
 
       return try self.service.dataSource.load(params: params)
     }
-
-    #if os(tvOS)
-      collectionView?.backgroundView = activityIndicatorView
-      items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
-    #endif
     
     items.loadInitialData(collectionView)
   }

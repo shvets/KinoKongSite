@@ -78,36 +78,26 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
   }
 
   @objc open func tapped(_ gesture: UITapGestureRecognizer) {
-    if let location = gesture.view as? UICollectionViewCell {
-      navigate(from: location)
-    }
-  }
+    if let view = gesture.view as? UICollectionViewCell {
+      if let indexPath = collectionView?.indexPath(for: view) {
+        let mediaItem = items.getItem(for: indexPath)
 
-  override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if let location = collectionView.cellForItem(at: indexPath) {
-      navigate(from: location)
-    }
-  }
+        switch mediaItem.name! {
+        case "Genres":
+          performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
 
-  func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
-    if let indexPath = collectionView?.indexPath(for: view) {
-      let mediaItem = items.getItem(for: indexPath)
-      
-      switch mediaItem.name! {
-      case "Genres":
-        performSegue(withIdentifier: GenresGroupController.SegueIdentifier, sender: view)
-        
-      case "Popular":
-        performSegue(withIdentifier: PopularController.SegueIdentifier, sender: view)
-        
-      case "Settings":
-        performSegue(withIdentifier: "Settings", sender: view)
-        
-      case "Search":
-        performSegue(withIdentifier: SearchController.SegueIdentifier, sender: view)
-        
-      default:
-        performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
+        case "Popular":
+          performSegue(withIdentifier: PopularController.SegueIdentifier, sender: view)
+
+        case "Settings":
+          performSegue(withIdentifier: "Settings", sender: view)
+
+        case "Search":
+          performSegue(withIdentifier: SearchController.SegueIdentifier, sender: view)
+
+        default:
+          performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
+        }
       }
     }
   }

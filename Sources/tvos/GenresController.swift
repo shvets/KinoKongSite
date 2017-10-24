@@ -24,19 +24,18 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
 
     setupLayout()
 
+#if os(tvOS)
+    collectionView?.backgroundView = activityIndicatorView
+    items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+#endif
+
     items.pageLoader.load = {
       var params = Parameters()
       params["requestType"] = "Genres Group"
       params["parentId"] = self.parentId
-      //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
-      
+
       return try self.service.dataSource.load(params: params)
     }
-
-    #if os(tvOS)
-      collectionView?.backgroundView = activityIndicatorView
-      items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
-    #endif
 
     items.loadInitialData(collectionView)
   }
@@ -78,19 +77,9 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
   }
 
   @objc open func tapped(_ gesture: UITapGestureRecognizer) {
-    if let location = gesture.view as? UICollectionViewCell {
-      navigate(from: location)
+    if let view = gesture.view as? UICollectionViewCell {
+      performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
     }
-  }
-
-  override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if let location = collectionView.cellForItem(at: indexPath) {
-      navigate(from: location)
-    }
-  }
-
-  func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
-    performSegue(withIdentifier: MediaItemsController.SegueIdentifier, sender: view)
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

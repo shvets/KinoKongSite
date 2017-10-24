@@ -93,7 +93,6 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
     }
   }
 
-
   func buildResetHistoryController() -> UIAlertController {
     let title = localizer.localize("History Will Be Reset")
     let message = localizer.localize("Please Confirm Your Choice")
