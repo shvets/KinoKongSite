@@ -181,7 +181,7 @@ class KinoKongDataSource: DataSource {
   }
 
   func createHistoryItem(_ item: HistoryItem) -> Item {
-    let newItem = MediaItem(data: ["name": ""])
+    let newItem = KinoKongMediaItem(data: ["name": ""])
 
     newItem.name = item.item.name
     newItem.id = item.item.id
@@ -193,7 +193,7 @@ class KinoKongDataSource: DataSource {
   }
 
   func createBookmarkItem(_ item: BookmarkItem) -> Item {
-    let newItem = MediaItem(data: ["name": ""])
+    let newItem = KinoKongMediaItem(data: ["name": ""])
 
     newItem.name = item.item.name
     newItem.id = item.item.id
