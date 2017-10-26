@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DBA18976653C18F0F8ADF77 /* KinoKongMediaItemsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA176A2D9CB221CD5415C7 /* KinoKongMediaItemsController.swift */; };
 		2DBA1EE7E4CA9651EEE2EAAF /* KinoKongSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1F53F4436A554D028605 /* KinoKongSite.swift */; };
 		FA6C12871EB04B9800DA4A90 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6C12861EB04B9800DA4A90 /* Alamofire.framework */; };
 		FA9BF8331EA3F1DE002F7D52 /* KinoKongSite.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9BF8311EA3F1DE002F7D52 /* KinoKongSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,7 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2DBA176A2D9CB221CD5415C7 /* KinoKongMediaItemsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongMediaItemsController.swift; sourceTree = "<group>"; };
 		2DBA1F53F4436A554D028605 /* KinoKongSite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinoKongSite.swift; sourceTree = "<group>"; };
 		FA6C12861EB04B9800DA4A90 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/EtvnetApp-auvgeykttffxrlaelzqpbfeqnwis/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		FA9BF82E1EA3F1DE002F7D52 /* KinoKongSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinoKongSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +116,6 @@
 				FA9BF8321EA3F1DE002F7D52 /* Info.plist */,
 				FAAFE4841EA3F2CC0092387A /* Localizable.strings */,
 				2DBA1F53F4436A554D028605 /* KinoKongSite.swift */,
-				2DBA176A2D9CB221CD5415C7 /* KinoKongMediaItemsController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -264,7 +261,6 @@
 				FAAFE5201EA6E2D90092387A /* KinoKongService.swift in Sources */,
 				FAAFE5121EA6E2CC0092387A /* GenresGroupTableViewController.swift in Sources */,
 				2DBA1EE7E4CA9651EEE2EAAF /* KinoKongSite.swift in Sources */,
-				2DBA18976653C18F0F8ADF77 /* KinoKongMediaItemsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

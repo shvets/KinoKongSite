@@ -16,7 +16,7 @@ class KinoKongMediaItem: MediaItem {
     fatalError("init(from:) has not been implemented")
   }
   
-  func isContainer() -> Bool {
+  override func isContainer() -> Bool {
     return type == "serie" || type == "season" || type == "rating"
   }
 
