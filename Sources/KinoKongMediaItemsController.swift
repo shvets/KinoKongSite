@@ -4,8 +4,7 @@ import AudioPlayer
 open class KinoKongMediaItemsController: MediaItemsController {
   override open func navigate(from view: UICollectionViewCell, playImmediately: Bool=false) {
     if let indexPath = collectionView?.indexPath(for: view),
-       let mediaItem = items.getItem(for: indexPath) as? MediaItem {
-
+       let mediaItem = items.getItem(for: indexPath) as? KinoKongMediaItem {
       if mediaItem.isContainer() {
         if let destination = MediaItemsController.instantiateController(configuration?["storyboardId"] as! String) {
           destination.configuration = configuration
