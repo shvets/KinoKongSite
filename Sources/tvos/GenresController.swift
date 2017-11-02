@@ -37,7 +37,13 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
       return try self.service.dataSource.load(params: params)
     }
 
-    items.loadInitialData(collectionView)
+    items.pageLoader.loadData { result in
+      if let items = result as? [Item] {
+        self.items.items = items
+
+        self.collectionView?.reloadData()
+      }
+    }
   }
 
   func setupLayout() {

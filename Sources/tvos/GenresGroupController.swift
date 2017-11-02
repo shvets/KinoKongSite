@@ -22,7 +22,13 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
       return self.loadGenresGroupMenu()
     }
 
-    items.loadInitialData(collectionView)
+    items.pageLoader.loadData { result in
+      if let items = result as? [Item] {
+        self.items.items = items
+
+        self.collectionView?.reloadData()
+      }
+    }
   }
 
   func setupLayout() {
