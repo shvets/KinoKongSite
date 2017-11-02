@@ -1,12 +1,13 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class GenresGroupTableViewController: UITableViewController {
   static let SegueIdentifier = "Genres Group"
   let CellIdentifier = "GenreGroupTableCell"
 
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
-
+  let pageLoader = PageLoader()
   let service = KinoKongService(true)
 
   private var items = Items()
@@ -16,11 +17,11 @@ class GenresGroupTableViewController: UITableViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       return self.loadGenresGroupMenu()
     }
 
-    self.items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class PopularTableViewController: UITableViewController {
   static let SegueIdentifier = "Popular"
@@ -14,6 +15,8 @@ class PopularTableViewController: UITableViewController {
 
   let service = KinoKongService(true)
 
+  let pageLoader = PageLoader()
+  
   private var items = Items()
 
   override func viewDidLoad() {
@@ -21,7 +24,7 @@ class PopularTableViewController: UITableViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       var params = Parameters()
       params["requestType"] = "Popular"
       //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
@@ -31,10 +34,10 @@ class PopularTableViewController: UITableViewController {
 
     #if os(iOS)
       tableView?.backgroundView = activityIndicatorView
-      items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+      //pageLoader.spinner = PlainSpinner(activityIndicatorView)
     #endif
     
-    self.items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

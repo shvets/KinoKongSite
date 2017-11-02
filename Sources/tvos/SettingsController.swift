@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class SettingsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   let CellIdentifier = "SettingCell"
@@ -7,7 +8,7 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
 
   let service = KinoKongService()
-
+  let pageLoader = PageLoader()
   private var items = Items()
 
   override func viewDidLoad() {
@@ -17,11 +18,11 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
 
     setupLayout()
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       return self.getSettingsMenu()
     }
 
-    items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

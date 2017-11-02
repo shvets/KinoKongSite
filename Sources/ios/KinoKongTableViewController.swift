@@ -1,11 +1,12 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 open class KinoKongTableViewController: UITableViewController {
   let CellIdentifier = "KinoKongTableCell"
 
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
-
+  let pageLoader = PageLoader()
   let service = KinoKongService(true)
 
   private var items = Items()
@@ -17,11 +18,11 @@ open class KinoKongTableViewController: UITableViewController {
 
     title = localizer.localize("KinoKong")
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       return self.getMenuItems()
     }
 
-    self.items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

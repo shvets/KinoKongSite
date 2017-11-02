@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class PopularController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   static let SegueIdentifier = "Popular"
@@ -13,6 +14,8 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
 
   let service = KinoKongService()
 
+  let pageLoader = PageLoader()
+  
   private var items = Items()
 
   override func viewDidLoad() {
@@ -24,17 +27,17 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
 
 #if os(tvOS)
     collectionView?.backgroundView = activityIndicatorView
-    items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+    pageLoader.spinner = PlainSpinner(activityIndicatorView)
 #endif
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       var params = Parameters()
       params["requestType"] = "Popular"
 
       return try self.service.dataSource.load(params: params)
     }
     
-    items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

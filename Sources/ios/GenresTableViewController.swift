@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class GenresTableViewController: UITableViewController {
   static let SegueIdentifier = "Genres"
@@ -13,9 +14,11 @@ class GenresTableViewController: UITableViewController {
 
   let service = KinoKongService(true)
 
-  var parentId: String?
-
+  let pageLoader = PageLoader()
+  
   private var items = Items()
+  
+  var parentId: String?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,7 +27,12 @@ class GenresTableViewController: UITableViewController {
 
     title = localizer.localize("Genres")
 
-    items.pageLoader.load = {
+    #if os(iOS)
+      tableView?.backgroundView = activityIndicatorView
+      //pageLoader.spinner = PlainSpinner(activityIndicatorView)
+    #endif
+    
+    pageLoader.load = {
       var params = Parameters()
       params["requestType"] = "Genres Group"
       params["parentId"] = self.parentId
@@ -32,13 +40,8 @@ class GenresTableViewController: UITableViewController {
 
       return try self.service.dataSource.load(params: params)
     }
-
-    #if os(iOS)
-      tableView?.backgroundView = activityIndicatorView
-      items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
-    #endif
     
-    self.items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

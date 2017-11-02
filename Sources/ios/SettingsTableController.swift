@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class SettingsTableController: UITableViewController {
   let CellIdentifier = "SettingTableCell"
@@ -7,7 +8,7 @@ class SettingsTableController: UITableViewController {
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
 
   let service = KinoKongService(true)
-
+  let pageLoader = PageLoader()
   private var items = Items()
 
   override func viewDidLoad() {
@@ -17,11 +18,11 @@ class SettingsTableController: UITableViewController {
 
     title = localizer.localize("Settings")
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       return self.getSettingsMenu()
     }
 
-    self.items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

@@ -1,6 +1,6 @@
 import UIKit
 import TVSetKit
-
+import PageLoader
 class GenresGroupController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   static let SegueIdentifier = "Genres Group"
   let CellIdentifier = "GenreGroupCell"
@@ -8,6 +8,8 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
 
   let service = KinoKongService()
+  
+  let pageLoader = PageLoader()
 
   private var items = Items()
 
@@ -18,11 +20,11 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
 
     setupLayout()
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       return self.loadGenresGroupMenu()
     }
 
-    items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

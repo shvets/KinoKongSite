@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 class GenresController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   static let SegueIdentifier = "Genres"
@@ -12,11 +13,13 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
 
   let service = KinoKongService()
-
-  var parentId: String?
+  
+  let pageLoader = PageLoader()
 
   private var items = Items()
 
+  var parentId: String?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -29,7 +32,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
     items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
 #endif
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       var params = Parameters()
       params["requestType"] = "Genres Group"
       params["parentId"] = self.parentId
@@ -37,7 +40,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
       return try self.service.dataSource.load(params: params)
     }
 
-    items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 

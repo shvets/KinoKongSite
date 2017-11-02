@@ -1,5 +1,6 @@
 import UIKit
 import TVSetKit
+import PageLoader
 
 open class KinoKongController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   let CellIdentifier = "KinoKongCell"
@@ -8,6 +9,8 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
 
   let service = KinoKongService()
 
+  let pageLoader = PageLoader()
+  
   private var items = Items()
 
   override open func viewDidLoad() {
@@ -17,11 +20,11 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
 
     setupLayout()
 
-    items.pageLoader.load = {
+    pageLoader.load = {
       return self.getMenuItems()
     }
 
-    items.pageLoader.loadData { result in
+    pageLoader.loadData { result in
       if let items = result as? [Item] {
         self.items.items = items
 
