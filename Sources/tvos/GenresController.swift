@@ -29,7 +29,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
 
 #if os(tvOS)
     collectionView?.backgroundView = activityIndicatorView
-    items.pageLoader.spinner = PlainSpinner(activityIndicatorView)
+    //pageLoader.spinner = PlainSpinner(activityIndicatorView)
 #endif
 
     pageLoader.load = {
