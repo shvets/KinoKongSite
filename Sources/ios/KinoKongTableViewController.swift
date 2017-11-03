@@ -18,11 +18,7 @@ open class KinoKongTableViewController: UITableViewController {
 
     title = localizer.localize("KinoKong")
 
-    pageLoader.load = {
-      return self.getMenuItems()
-    }
-
-    pageLoader.loadData { result in
+    pageLoader.loadData(onLoad: getMenuItems) { result in
       if let items = result as? [Item] {
         self.items.items = items
 
@@ -31,7 +27,7 @@ open class KinoKongTableViewController: UITableViewController {
     }
   }
 
-  func getMenuItems() -> [Item] {
+  func getMenuItems() throws -> [Any] {
     return [
       MediaName(name: "Bookmarks", imageName: "Star"),
       MediaName(name: "History", imageName: "Bookmark"),

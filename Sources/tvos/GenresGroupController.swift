@@ -20,11 +20,7 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
 
     setupLayout()
 
-    pageLoader.load = {
-      return self.loadGenresGroupMenu()
-    }
-
-    pageLoader.loadData { result in
+    pageLoader.loadData(onLoad: loadGenresGroupMenu) { result in
       if let items = result as? [Item] {
         self.items.items = items
 
@@ -44,7 +40,7 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
     collectionView?.collectionViewLayout = layout
   }
 
-  func loadGenresGroupMenu() -> [Item] {
+  func loadGenresGroupMenu() throws -> [Any] {
     return [
       MediaName(name: "Movies"),
       MediaName(name: "Series"),

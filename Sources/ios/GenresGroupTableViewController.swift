@@ -17,11 +17,11 @@ class GenresGroupTableViewController: UITableViewController {
 
     self.clearsSelectionOnViewWillAppear = false
 
-    pageLoader.load = {
+    func load() throws -> [Any] {
       return self.loadGenresGroupMenu()
     }
 
-    pageLoader.loadData { result in
+    pageLoader.loadData(onLoad: load) { result in
       if let items = result as? [Item] {
         self.items.items = items
 

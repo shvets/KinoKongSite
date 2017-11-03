@@ -9,7 +9,7 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
 
   let service = KinoKongService()
 
-  let pageLoader = PageLoader()
+  var pageLoader = PageLoader()
   
   private var items = Items()
 
@@ -20,11 +20,7 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
 
     setupLayout()
 
-    pageLoader.load = {
-      return self.getMenuItems()
-    }
-
-    pageLoader.loadData { result in
+    pageLoader.loadData(onLoad: getMenuItems) { result in
       if let items = result as? [Item] {
         self.items.items = items
 
@@ -44,7 +40,7 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
     collectionView?.collectionViewLayout = layout
   }
 
-  func getMenuItems() -> [Item] {
+  func getMenuItems() throws -> [Any] {
     return [
       MediaName(name: "Bookmarks", imageName: "Star"),
       MediaName(name: "History", imageName: "Bookmark"),

@@ -18,11 +18,7 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
 
     setupLayout()
 
-    pageLoader.load = {
-      return self.getSettingsMenu()
-    }
-
-    pageLoader.loadData { result in
+    pageLoader.loadData(onLoad: getSettingsMenu) { result in
       if let items = result as? [Item] {
         self.items.items = items
 
@@ -42,7 +38,7 @@ class SettingsController: UICollectionViewController, UICollectionViewDelegateFl
     collectionView?.collectionViewLayout = layout
   }
 
-  func getSettingsMenu() -> [Item] {
+  func getSettingsMenu() throws -> [Any] {
     return [
       Item(name: "Reset History"),
       Item(name: "Reset Bookmarks")
