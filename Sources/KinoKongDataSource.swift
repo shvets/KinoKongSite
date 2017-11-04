@@ -6,7 +6,7 @@ import RxSwift
 class KinoKongDataSource: DataSource {
   let service = KinoKongService.shared
 
-  override open func loadAsync(params: Parameters) throws -> Observable<[Any]> {
+  override open func load(params: Parameters) throws -> Observable<[Any]> {
     var items: Observable<[Any]> = Observable.just([])
 
     let selectedItem = params["selectedItem"] as? MediaItem
