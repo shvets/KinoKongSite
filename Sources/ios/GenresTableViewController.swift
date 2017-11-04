@@ -38,7 +38,7 @@ class GenresTableViewController: UITableViewController {
       params["parentId"] = self.parentId
       //params["pageSize"] = self.service.getConfiguration()["pageSize"] as! Int
 
-      return try self.service.dataSource.load(params: params)
+      return try self.service.dataSource.loadAndWait(params: params)
     }
     
     pageLoader.loadData(onLoad: load) { result in

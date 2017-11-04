@@ -1,12 +1,13 @@
 import SwiftSoup
 import WebAPI
 import TVSetKit
+import RxSwift
 
 class KinoKongDataSource: DataSource {
   let service = KinoKongService.shared
 
-  override open func load(params: Parameters) throws -> [Any] {
-    var items = [Any]()
+  override open func loadAsync(params: Parameters) throws -> Observable<[Any]> {
+    var items: Observable<[Any]> = Observable.just([])
 
     let selectedItem = params["selectedItem"] as? MediaItem
 
@@ -35,7 +36,7 @@ class KinoKongDataSource: DataSource {
          let bookmarks = bookmarksManager.bookmarks {
         let data = bookmarks.getBookmarks(pageSize: 60, page: currentPage)
 
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "History":
@@ -43,37 +44,37 @@ class KinoKongDataSource: DataSource {
          let history = historyManager.history {
         let data = history.getHistoryItems(pageSize: 60, page: currentPage)
 
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "All Movies":
       if let data = try service.getAllMovies(page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "New Movies":
       if let data = try service.getNewMovies(page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "All Series":
       if let data = try service.getAllSeries(page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "Animations":
       if let data = try service.getAnimations(page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "Anime":
       if let data = try service.getAnime(page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "Shows":
       if let data = try service.getTvShows(page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "Genres Group":
@@ -81,7 +82,7 @@ class KinoKongDataSource: DataSource {
         let groupedGenres = try service.getGroupedGenres()
 
         if let data = groupedGenres[genresType] {
-          items = adjustItems(data)
+          items = Observable.just(adjustItems(data))
         }
       }
 
@@ -89,25 +90,25 @@ class KinoKongDataSource: DataSource {
       if let selectedItem = selectedItem,
          let path = selectedItem.id,
          let data = try service.getMovies(path, page: currentPage)["movies"] as? [Any] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "Popular":
       let groupedGenres = try service.getGroupedGenres()
 
       if let data = groupedGenres["top"] {
-        items = adjustItems(data)
+        items = Observable.just(adjustItems(data))
       }
 
     case "Rating":
       if let selectedItem = selectedItem,
          let path = selectedItem.id {
         if path == "/podborka.html" {
-          items = try service.getTags()
+          items = Observable.just(try service.getTags())
         }
         else {
           if let data = try service.getMoviesByCriteriaPaginated(path, page: currentPage)["movies"] as? [Any] {
-            items = adjustItems(data)
+            items = Observable.just(adjustItems(data))
           }
         }
       }
@@ -117,27 +118,27 @@ class KinoKongDataSource: DataSource {
          let path = selectedItem.id {
         let playlistUrl = try service.getSeriePlaylistUrl(path)
 
-        items = try service.getSeasons(playlistUrl)
+        let seasons = try service.getSeasons(playlistUrl)
 
-        items = adjustItems(items, selectedItem: selectedItem)
+        items = Observable.just(adjustItems(seasons, selectedItem: selectedItem))
       }
 
     case "Episodes":
       if let selectedItem = selectedItem {
-        items = adjustItems(episodes, selectedItem: selectedItem)
+        items = Observable.just(adjustItems(episodes, selectedItem: selectedItem))
       }
 
     case "Search":
       if let query = params["query"] as? String {
         if !query.isEmpty {
           if let data = try service.search(query, page: currentPage)["movies"] as? [Any] {
-            items = adjustItems(data)
+            items = Observable.just(adjustItems(data))
           }
         }
       }
 
     default:
-      items = []
+      items = Observable.just([])
     }
 
     return items
