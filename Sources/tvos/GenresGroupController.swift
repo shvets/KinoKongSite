@@ -93,13 +93,13 @@ class GenresGroupController: UICollectionViewController, UICollectionViewDelegat
 
             switch mediaItem.name! {
               case "Movies":
-                destination.parentId = "films"
+                destination.parentId = "film"
 
               case "Series":
-                destination.parentId = "serial"
+                destination.parentId = "series"
               
               case "Anime":
-                destination.parentId = "anime"
+                destination.parentId = "animes"
               
               default: break
             }
