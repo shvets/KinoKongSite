@@ -103,7 +103,7 @@ class KinoKongDataSource: DataSource {
     case "Rating":
       if let selectedItem = selectedItem,
          let path = selectedItem.id {
-        if path == "/podborka.html" {
+        if path == "/kino-podborka.html" {
           items = Observable.just(try service.getTags())
         }
         else {
