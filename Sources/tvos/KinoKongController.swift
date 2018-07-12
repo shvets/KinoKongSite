@@ -130,6 +130,8 @@ open class KinoKongController: UICollectionViewController, UICollectionViewDeleg
           if let destination = segue.destination.getActionController() as? SearchController {
             destination.params["requestType"] = "Search"
             destination.params["parentName"] = localizer.localize("Search Results")
+
+            destination.configuration = service.getConfiguration()
           }
 
         default:
