@@ -118,7 +118,7 @@ class KinoKongDataSource: DataSource {
          let path = selectedItem.id {
         let playlistUrl = try service.getSeriePlaylistUrl(path)
 
-        let seasons = try service.getSeasons(playlistUrl, path: path)
+        let seasons = try service.getSeasons(playlistUrl, path: "")
 
         items = Observable.just(adjustItems(seasons, selectedItem: selectedItem))
       }
