@@ -8,7 +8,7 @@ class PopularTableViewController: UITableViewController {
   let CellIdentifier = "PopularTableCell"
 
 #if os(iOS)
-  public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+  public let activityIndicatorView = UIActivityIndicatorView(style: .gray)
 #endif
 
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)

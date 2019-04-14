@@ -7,7 +7,7 @@ class GenresTableViewController: UITableViewController {
   let CellIdentifier = "GenreTableCell"
 
 #if os(iOS)
-  public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+  public let activityIndicatorView = UIActivityIndicatorView(style: .gray)
 #endif
 
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
@@ -15,9 +15,9 @@ class GenresTableViewController: UITableViewController {
   let service = KinoKongService(true)
 
   let pageLoader = PageLoader()
-  
+
   private var items = Items()
-  
+
   var parentId: String?
 
   override func viewDidLoad() {
@@ -31,7 +31,7 @@ class GenresTableViewController: UITableViewController {
       tableView?.backgroundView = activityIndicatorView
       pageLoader.spinner = PlainSpinner(activityIndicatorView)
     #endif
-    
+
     func load() throws -> [Any] {
       var params = Parameters()
       params["requestType"] = "Genres Group"
@@ -40,7 +40,7 @@ class GenresTableViewController: UITableViewController {
 
       return try self.service.dataSource.loadAndWait(params: params)
     }
-    
+
     pageLoader.loadData(onLoad: load) { result in
       if let items = result as? [Item] {
         self.items.items = items
