@@ -7,7 +7,7 @@ class PopularController: UICollectionViewController, UICollectionViewDelegateFlo
   let CellIdentifier = "PopularCell"
 
 #if os(tvOS)
-  public let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    public let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
 #endif
 
   let localizer = Localizer(KinoKongService.BundleId, bundleClass: KinoKongSite.self)
