@@ -37,7 +37,7 @@ class GenresController: UICollectionViewController, UICollectionViewDelegateFlow
       params["requestType"] = "Genres Group"
       params["parentId"] = self.parentId
 
-      return try self.service.dataSource.loadAndWait(params: params)
+      return try self.service.dataSource.load(params: params)
     }
 
     pageLoader.loadData(onLoad: load) { result in

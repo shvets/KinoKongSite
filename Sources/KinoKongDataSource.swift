@@ -1,13 +1,12 @@
 import SwiftSoup
-import WebAPI
+import MediaApis
 import TVSetKit
-import RxSwift
 
 class KinoKongDataSource: DataSource {
   let service = KinoKongService.shared
 
-  override open func load(params: Parameters) throws -> Observable<[Any]> {
-    var items: Observable<[Any]> = Observable.just([])
+  override open func load(params: Parameters) throws -> [Any] {
+    var items: [Any] = []
 
     let selectedItem = params["selectedItem"] as? MediaItem
 
@@ -34,82 +33,85 @@ class KinoKongDataSource: DataSource {
     case "Bookmarks":
       if let bookmarksManager = params["bookmarksManager"] as? BookmarksManager,
          let bookmarks = bookmarksManager.bookmarks {
+        bookmarks.load()
         let data = bookmarks.getBookmarks(pageSize: 60, page: currentPage)
 
-        items = Observable.just(adjustItems(data))
+        items = adjustItems(data)
       }
 
     case "History":
       if let historyManager = params["historyManager"] as? HistoryManager,
          let history = historyManager.history {
+        history.load()
         let data = history.getHistoryItems(pageSize: 60, page: currentPage)
 
-        items = Observable.just(adjustItems(data))
+        items = adjustItems(data)
       }
 
     case "All Movies":
-      if let data = try service.getAllMovies(page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
-      }
+      let data = try service.getAllMovies(page: currentPage).items
+      
+      items = adjustItems(data)
 
     case "New Movies":
-      if let data = try service.getNewMovies(page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
-      }
+      let data = try service.getNewMovies(page: currentPage).items
+      
+      items = adjustItems(data)
 
     case "All Series":
-      if let data = try service.getAllSeries(page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
-      }
+      let data = try service.getAllSeries(page: currentPage).items
+      
+      items = adjustItems(data)
 
     case "Animations":
-      if let data = try service.getAnimations(page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
-      }
+      let data = try service.getAnimations(page: currentPage).items
+      
+      items = adjustItems(data)
 
     case "Anime":
-      if let data = try service.getAnime(page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
-      }
+      let data = try service.getAnime(page: currentPage).items
+      
+      items = adjustItems(data)
 
     case "Shows":
-      if let data = try service.getTvShows(page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
-      }
+      let data = try service.getTvShows(page: currentPage).items
+     
+      items = adjustItems(data)
 
     case "Genres Group":
       if let genresType = params["parentId"] as? String {
         let groupedGenres = try service.getGroupedGenres()
 
         if let data = groupedGenres[genresType] {
-          items = Observable.just(adjustItems(data))
+          items = adjustItems(data)
         }
       }
 
     case "Genres":
       if let selectedItem = selectedItem,
-         let path = selectedItem.id,
-         let data = try service.getMovies(path, page: currentPage)["movies"] as? [Any] {
-        items = Observable.just(adjustItems(data))
+        let path = selectedItem.id {
+         let data = try service.getMovies(path, page: currentPage).items
+        
+        items = adjustItems(data)
       }
 
     case "Popular":
       let groupedGenres = try service.getGroupedGenres()
 
       if let data = groupedGenres["top"] {
-        items = Observable.just(adjustItems(data))
+        items = adjustItems(data)
       }
 
     case "Rating":
       if let selectedItem = selectedItem,
          let path = selectedItem.id {
         if path == "/kino-podborka.html" {
-          items = Observable.just(try service.getTags())
+          items = try service.getTags()
         }
         else {
-          if let data = try service.getMoviesByCriteriaPaginated(path, page: currentPage)["movies"] as? [Any] {
-            items = Observable.just(adjustItems(data))
-          }
+          let data = try service.getMoviesByCriteriaPaginated(path, page: currentPage).items
+          
+          items = adjustItems(data)
         }
       }
 
@@ -117,28 +119,34 @@ class KinoKongDataSource: DataSource {
       if let selectedItem = selectedItem,
          let path = selectedItem.id {
         let playlistUrl = try service.getSeriePlaylistUrl(path)
-
-        let seasons = try service.getSeasons(playlistUrl, path: path)
-
-        items = Observable.just(adjustItems(seasons, selectedItem: selectedItem))
+        
+        if !playlistUrl.isEmpty {
+          let seasons = try service.getSeasons(playlistUrl, path: path)
+        
+          if let posterUrl = try service.getSeriePosterUrl("\(KinoKongAPI.SiteUrl)/\(path)") {
+            selectedItem.thumb = posterUrl
+          }
+          
+          items = adjustItems(seasons, selectedItem: selectedItem)
+        }
       }
 
     case "Episodes":
       if let selectedItem = selectedItem {
-        items = Observable.just(adjustItems(episodes, selectedItem: selectedItem))
+        items = adjustItems(episodes, selectedItem: selectedItem)
       }
 
     case "Search":
       if let query = params["query"] as? String {
         if !query.isEmpty {
-          if let data = try service.search(query, page: currentPage)["movies"] as? [Any] {
-            items = Observable.just(adjustItems(data))
-          }
+          let data = try service.search(query, page: currentPage).items
+          
+          items = adjustItems(data)
         }
       }
 
     default:
-      items = Observable.just([])
+      items = []
     }
 
     return items

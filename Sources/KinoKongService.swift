@@ -1,4 +1,4 @@
-import WebAPI
+import MediaApis
 import TVSetKit
 
 public class KinoKongService {
